@@ -1,21 +1,17 @@
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import React from 'react';
 import Login from './pages/Login';
+import LoginProvider from './context/LoginProvider';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Route path="/login" element={ <Login /> } />
-      <Route exact path="/" element={ <Login /> } />
-      {/* <Route
-        path="/post"
-        element={
-          <PostProvider>
-            <Post />
-          </PostProvider>
-        }
-      /> */}
-    </BrowserRouter>
+    <Switch>
+      <LoginProvider>
+        <Route path="/login" component={ Login } />
+        <Route exact path="/" component={ Login } />
+      </LoginProvider>
+    </Switch>
+
   );
 }
 

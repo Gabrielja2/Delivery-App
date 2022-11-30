@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { requestLogin } from '../services/requests';
 
@@ -7,16 +7,16 @@ function SubmitBtn({ routeSuffix, sendObject, navigation, btnName, setter = unde
   const [errorRequisiton, setErrorRequisition] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
-  const navigate = NavLink();
+  const navigate = useHistory();
 
   function handleSubmit() {
     requestLogin(routeSuffix, sendObject)
       .then((data) => {
-        if (navigation === '/post') {
+        if (navigation === '/login') {
           localStorage.setItem('token', data.token);
           if (setter) setter(false);
         }
-        navigate(navigation);
+        navigate.push(navigation);
       })
       .catch(({ response }) => {
         setErrorMessage(response.data.message);

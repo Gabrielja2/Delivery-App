@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import EmailInput from '../components/EmailInput';
 import GenericInput from '../components/GenericInput';
 import RegisterBtn from '../components/RegisterBtn';
 import SubmitBtn from '../components/SubmitBtn';
-// import { Navigate } from 'react-router-dom';
+import LoginContext from '../context/LoginContext';
 
 function Login() {
-  // const { email, setEmail, password, setPassword } = useContext(LoginContext);
-
-  // const obj = { email, password };
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { email, setEmail, password, setPassword } = useContext(LoginContext);
+  const [failedTryLogin, setFailedTryLogin] = useState(false);
+  const obj = { email, password };
 
   useEffect(() => {
     setFailedTryLogin(false);
@@ -34,7 +32,7 @@ function Login() {
           datat-testid="common_login__button-login"
           routeSuffix="login"
           sendObject={ obj }
-          navigation="/post"
+          navigation="/login"
           btnName="Entrar"
         />
         <RegisterBtn />
