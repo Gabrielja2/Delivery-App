@@ -1,21 +1,28 @@
-const md5 = require('md5');
 const { User } = require('../../database/models');
 const { generateToken } = require('../utils/JWT');
-const errorGenerate = require('../utils/errorGenerate');
+const { comparePass } = require('../validations/md5Login');
 
 const login = async ({ email, password }) => {
   const user = await User.findOne({ where: { email } });
-  const md5Password = md5(password);
+  const compare = comparePass(password, user.password);
 
-  if (!user) throw errorGenerate(404, 'User not found');
-  if (md5Password !== user.password) throw errorGenerate(401, 'Incorrect password');
-
+  if (!compare) throw new Error('The password does not match');
+  
   const { id, role } = user;
   const token = generateToken({ id, role });
 
   return token;  
 };
 
+const findUser = async ({ email }) => {
+  const user = await User.findOne({ where: { email } });
+  
+  if (!user) return undefined;
+
+  return user.email;
+};
+
 module.exports = {
   login,
+  findUser,
 };
