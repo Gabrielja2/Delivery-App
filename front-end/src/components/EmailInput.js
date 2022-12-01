@@ -19,14 +19,14 @@ function handleEmail({ value }, setValidEmail, setEmail) {
   }
 }
 
-function EmailInput({ setEmail }) {
+function EmailInput({ setEmail, testid }) {
   const [validEmail, setValidEmail] = useState(true);
 
   return (
     <label htmlFor="email">
       Email
       <input
-        data-testid="common_login__input-email"
+        data-testid={ testid }
         type="email"
         id="email"
         className="email"
