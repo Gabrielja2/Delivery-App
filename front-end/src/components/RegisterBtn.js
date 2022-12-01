@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom';
 
 function RegisterBtn() {
   return (
-    <Link data-testid="common_login__button-register" to="/register">
-      Sign in
+    <Link to="/register">
+      <button
+        type="button"
+        className="register-btn"
+        data-testid="common_login__button-register"
+      >
+        Ainda não tenho conta
+      </button>
     </Link>
   );
 }
