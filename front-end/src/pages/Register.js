@@ -1,20 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import EmailInput from '../components/EmailInput';
 import GenericInput from '../components/GenericInput';
 import SubmitBtn from '../components/SubmitBtn';
-import UserContext from '../context/UserContext';
+// import UserContext from '../context/UserContext';
 import '../style/Login.css';
 
 function Register() {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    name,
-    setName } = useContext(UserContext);
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
 
-  const obj = { email, password, name };
+  const obj = { email, name, password };
 
   return (
     <section className="wrapper">
