@@ -9,7 +9,8 @@ function SubmitBtn({
   navigation,
   btnName,
   setter = undefined,
-  testid }) {
+  testid,
+  isDisable }) {
   const [errorRequisiton, setErrorRequisition] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
@@ -39,6 +40,7 @@ function SubmitBtn({
   return (
     <>
       <button
+        disabled={ isDisable }
         data-testid={ testid }
         type="button"
         className="submit-btn"

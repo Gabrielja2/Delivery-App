@@ -9,11 +9,21 @@ import '../style/Login.css';
 function Login() {
   const { email, setEmail, password, setPassword } = useContext(LoginContext);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
   const obj = { email, password };
+  const PASSWORDLENGTH = 6;
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
 
   useEffect(() => {
+    if (password !== undefined && password.length >= PASSWORDLENGTH && emailRegex) {
+      console.log('aki');
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+
     setFailedTryLogin(false);
-  }, [email, password]);
+  }, [password, emailRegex]);
 
   return (
     <section className="wrapper">
@@ -31,6 +41,7 @@ function Login() {
             setter={ setPassword }
           />
           <SubmitBtn
+            isDisable={ isDisabled }
             testid="common_login__button-login"
             routeSuffix="login"
             sendObject={ obj }
