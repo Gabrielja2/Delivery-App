@@ -8,7 +8,7 @@ import '../style/Login.css';
 
 function Login() {
   const { email, setEmail, password, setPassword } = useContext(LoginContext);
-  const [failedTryLogin, setFailedTryLogin] = useState(false);
+  const [failedTryLogin, setFailedTryLogin] = useState(true);
   const [isDisabled, setIsDisabled] = useState(true);
   const obj = { email, password };
   const PASSWORDLENGTH = 6;
@@ -56,7 +56,7 @@ function Login() {
       {
         (failedTryLogin)
           && (
-            <p data-testid="login__input_invalid_login_alert">
+            <p data-testid="common_login__element-invalid-email">
               {
                 `O endereço de e-mail ou a senha não estão corretos.
                   Por favor, tente novamente.`
