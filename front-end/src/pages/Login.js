@@ -31,7 +31,6 @@ function Login() {
             setter={ setPassword }
           />
           <SubmitBtn
-            datat-testid="common_login__button-login"
             routeSuffix="login"
             sendObject={ obj }
             navigation="/login"

@@ -33,6 +33,7 @@ function SubmitBtn({ routeSuffix, sendObject, navigation, btnName, setter = unde
   return (
     <>
       <button
+        data-testid="common_login__button-login"
         type="button"
         className="submit-btn"
         onClick={ () => handleSubmit() }
