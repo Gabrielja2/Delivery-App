@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 function renderSpan() {
   return (
     <span className="error-msg">
-      O e-mail deve ser um e-mail válido. Exemplo: exemplo@exemplo.com
+      O e-mail deve ser um e-mail válido.
+      <br />
+      Exemplo: exemplo@exemplo.com
     </span>
   );
 }

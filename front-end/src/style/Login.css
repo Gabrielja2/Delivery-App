@@ -47,7 +47,9 @@ label {
 
 .error-msg {
   color: #626262;
+  display: block;
   font-size: 12px;
+  max-width: fit-content;
 }
 
 .register-btn {
