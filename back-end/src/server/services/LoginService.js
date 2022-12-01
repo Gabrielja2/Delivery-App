@@ -13,18 +13,9 @@ const login = async ({ email, password }) => {
   const { id, role } = user;
   const token = generateToken({ id, role });
 
-  return token;  
-};
-
-const findUser = async ({ email }) => {
-  const user = await User.findOne({ where: { email } });
-  
-  if (!user) return undefined;
-
-  return user.email;
+  return token; 
 };
 
 module.exports = {
   login,
-  findUser,
 };
