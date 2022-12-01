@@ -33,7 +33,7 @@ function SubmitBtn({
 
   function renderMessage() {
     return (
-      <span>{errorMessage}</span>
+      <span data-testid="common_login__element-invalid-email">{errorMessage}</span>
     );
   }
 
