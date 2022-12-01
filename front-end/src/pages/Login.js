@@ -27,7 +27,10 @@ function Login() {
         <img alt="Trybe Delivery App" />
         <form className="form">
           <h1>App Delivery</h1>
-          <EmailInput setEmail={ setEmail } />
+          <EmailInput
+            testid="common_login__input-email"
+            setEmail={ setEmail }
+          />
           <GenericInput
             testid="common_login__input-password"
             type="password"

@@ -1,6 +1,7 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
 import React from 'react';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import LoginProvider from './context/LoginProvider';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         </Redirect>
         <Route path="/login" component={ Login } />
       </LoginProvider>
+      <Route path="/register" component={ Register } />
     </Switch>
 
   );

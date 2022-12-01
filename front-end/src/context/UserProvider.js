@@ -1,22 +1,25 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import LoginContext from './LoginContext';
+import UserContext from './LoginContext';
 
 function LoginProvider({ children }) {
   const [email, setEmail] = useState();
+  const [name, setName] = useState();
   const [password, setPassword] = useState();
 
-  const contextLogin = useMemo(() => ({
+  const contextUser = useMemo(() => ({
+    name,
+    setName,
     email,
     setEmail,
     password,
     setPassword,
-  }), [email, password]);
+  }), [email, password, name]);
 
   return (
-    <LoginContext.Provider value={ contextLogin }>
+    <UserContext.Provider value={ contextUser }>
       { children }
-    </LoginContext.Provider>
+    </UserContext.Provider>
   );
 }
 
