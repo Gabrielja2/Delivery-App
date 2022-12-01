@@ -1,14 +1,6 @@
 const { findUser } = require('../services/LoginService');
 const { loginSchema, registrationSchema } = require('../validations/JoiSchemas');
 
-const findUserLogin = (req, res, next) => {
-  const user = findUser(req.body);
-
-  if (!user) return res.status(404).json({ message: 'User not found' });
-
-  next();
-};
-
 const findUserRegister = (req, res, next) => {
   const user = findUser(req.body);
 
@@ -33,4 +25,4 @@ const registerInputValidation = (req, res, next) => {
   next();
 };
 
-module.exports = { findUserLogin, findUserRegister, loginInputValidation, registerInputValidation };
+module.exports = { findUserRegister, loginInputValidation, registerInputValidation };

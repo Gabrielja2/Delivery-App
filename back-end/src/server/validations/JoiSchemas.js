@@ -2,14 +2,14 @@ const Joi = require('joi');
 
 const loginSchema = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string().required(),
+  password: Joi.string().min(6).required(),
 });
 
 const registrationSchema = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string().min(8).regex(/(?=.*[A-Z])(?=.*[0-9])/i).required()
+  password: Joi.string().min(6).required()
   .messages({
-    'any.required': 'Password should have at least 8 characters and one letter in uppercase',
+    'any.required': 'Password should have at least 6 characters',
   }),
 });
 

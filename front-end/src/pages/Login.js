@@ -8,12 +8,18 @@ import '../style/Login.css';
 
 function Login() {
   const { email, setEmail, password, setPassword } = useContext(LoginContext);
-  const [failedTryLogin, setFailedTryLogin] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
   const obj = { email, password };
+  const PASSWORDLENGTH = 6;
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
 
   useEffect(() => {
-    setFailedTryLogin(false);
-  }, [email, password]);
+    if (password !== undefined && password.length >= PASSWORDLENGTH && emailRegex) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [password, emailRegex]);
 
   return (
     <section className="wrapper">
@@ -31,25 +37,18 @@ function Login() {
             setter={ setPassword }
           />
           <SubmitBtn
+            isDisable={ isDisabled }
+            testid="common_login__button-login"
             routeSuffix="login"
             sendObject={ obj }
-            navigation="/login"
+            navigation="/customer/products"
             btnName="Entrar"
           />
-          <RegisterBtn />
+          <RegisterBtn
+            testid="common_login__button-register"
+          />
         </form>
       </section>
-      {
-        (failedTryLogin)
-          && (
-            <p data-testid="login__input_invalid_login_alert">
-              {
-                `O endereço de e-mail ou a senha não estão corretos.
-                  Por favor, tente novamente.`
-              }
-            </p>
-          )
-      }
     </section>
   );
 }
