@@ -41,7 +41,7 @@ function Login() {
             testid="common_login__button-login"
             routeSuffix="login"
             sendObject={ obj }
-            navigation="/login"
+            navigation="/customer/products"
             btnName="Entrar"
           />
           <RegisterBtn
