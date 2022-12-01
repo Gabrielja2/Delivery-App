@@ -26,9 +26,9 @@
 }
 
 .password, .email {
-  width: 97%;
   height: 35px;
   margin-bottom: 10px;
+  width: 97%;
 }
 
 label {
