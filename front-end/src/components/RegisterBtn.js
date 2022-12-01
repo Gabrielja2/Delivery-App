@@ -1,18 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
-function RegisterBtn() {
+function RegisterBtn({ testid }) {
+  const navigate = useHistory();
+
+  function handleClick() {
+    navigate.push('/register');
+  }
+
   return (
-    <Link to="/register">
-      <button
-        type="button"
-        className="register-btn"
-        data-testid="common_login__button-register"
-      >
-        Ainda não tenho conta
-      </button>
-    </Link>
+    <button
+      data-testid={ testid }
+      className="register-btn"
+      type="button"
+      onClick={ () => handleClick() }
+    >
+      Sign in
+    </button>
   );
 }
+
+RegisterBtn.propTypes = {
+  testid: PropTypes.string,
+}.isRequired;
 
 export default RegisterBtn;

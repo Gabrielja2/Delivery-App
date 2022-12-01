@@ -3,7 +3,13 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { requestLogin } from '../services/requests';
 
-function SubmitBtn({ routeSuffix, sendObject, navigation, btnName, setter = undefined }) {
+function SubmitBtn({
+  routeSuffix,
+  sendObject,
+  navigation,
+  btnName,
+  setter = undefined,
+  testid }) {
   const [errorRequisiton, setErrorRequisition] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
@@ -33,7 +39,7 @@ function SubmitBtn({ routeSuffix, sendObject, navigation, btnName, setter = unde
   return (
     <>
       <button
-        data-testid="common_login__button-login"
+        data-testid={ testid }
         type="button"
         className="submit-btn"
         onClick={ () => handleSubmit() }

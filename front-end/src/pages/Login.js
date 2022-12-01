@@ -31,12 +31,15 @@ function Login() {
             setter={ setPassword }
           />
           <SubmitBtn
+            testid="common_login__button-login"
             routeSuffix="login"
             sendObject={ obj }
             navigation="/login"
             btnName="Entrar"
           />
-          <RegisterBtn />
+          <RegisterBtn
+            testid="common_login__button-register"
+          />
         </form>
       </section>
       {
