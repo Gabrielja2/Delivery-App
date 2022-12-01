@@ -32,7 +32,11 @@ function SubmitBtn({ routeSuffix, sendObject, navigation, btnName, setter = unde
 
   return (
     <>
-      <button type="button" onClick={ () => handleSubmit() }>
+      <button
+        type="button"
+        className="submit-btn"
+        onClick={ () => handleSubmit() }
+      >
         { btnName }
       </button>
       { errorRequisiton && renderMessage() }
