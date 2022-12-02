@@ -7,13 +7,13 @@ import LoginProvider from './context/LoginProvider';
 function App() {
   return (
     <Switch>
+      <Route path="/register" component={ Register } />
       <LoginProvider>
         <Redirect to="/login">
           <Route exact path="/" component={ Login } />
         </Redirect>
         <Route path="/login" component={ Login } />
       </LoginProvider>
-      <Route path="/register" component={ Register } />
     </Switch>
 
   );
