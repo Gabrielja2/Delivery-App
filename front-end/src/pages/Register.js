@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import EmailInput from '../components/EmailInput';
 import GenericInput from '../components/GenericInput';
-import SubmitBtn from '../components/SubmitBtn';
+import Button from '../components/Button';
 import UserContext from '../context/UserContext';
-
+import { registerValidations } from '../utils/validations';
 import '../style/Login.css';
 
 function Register() {
@@ -14,8 +14,6 @@ function Register() {
     setPassword,
     name,
     setName } = useContext(UserContext);
-
-  const obj = { email, name, password };
 
   return (
     <section className="wrapper">
@@ -43,12 +41,12 @@ function Register() {
             placeholder="******"
             setter={ setPassword }
           />
-          <SubmitBtn
+          <Button
             testid="common_register__button-register"
-            routeSuffix="cadastrar"
-            sendObject={ obj }
-            navigation="/login"
             btnName="Cadastrar"
+            type="submit"
+            // onClick={ handleSubmit }
+            isDisable={ registerValidations(email, password, name) }
           />
         </form>
       </section>

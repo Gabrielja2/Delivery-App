@@ -1,15 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import EmailInput from '../components/EmailInput';
 import GenericInput from '../components/GenericInput';
 import RegisterBtn from '../components/RegisterBtn';
-import SubmitBtn from '../components/SubmitBtn';
+import Button from '../components/Button';
 import UserContext from '../context/UserContext';
 import '../style/Login.css';
-import loginValidations from '../utils/validations';
+import { loginValidations } from '../utils/validations';
+import { requestLogin } from '../services/requests';
 
 function Login() {
   const { email, setEmail, password, setPassword } = useContext(UserContext);
-  const obj = { email, password };
+  const [errorRequisiton, setErrorRequisition] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
+  const navigate = useHistory();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await requestLogin('/login', { email, password });
+
+      if (data) {
+        localStorage.setItem('token', data.token);
+        navigate.push('/customer/products');
+      }
+    } catch ({ response }) {
+      setErrorMessage(response.data.message);
+      setErrorRequisition(true);
+    }
+  };
 
   return (
     <section className="wrapper">
@@ -29,14 +48,16 @@ function Login() {
             placeholder="********"
             setter={ setPassword }
           />
-          <SubmitBtn
-            isDisable={ loginValidations(email, password) }
+          <Button
             testid="common_login__button-login"
-            routeSuffix="login"
-            sendObject={ obj }
-            navigation="/customer/products"
+            type="submit"
             btnName="Entrar"
+            onClick={ handleSubmit }
+            isDisable={ loginValidations(email, password) }
           />
+          {errorRequisiton && (
+            <span data-testid="common_login__element-invalid-email">{errorMessage}</span>
+          )}
           <RegisterBtn
             testid="common_login__button-register"
           />
