@@ -1,25 +1,15 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import EmailInput from '../components/EmailInput';
 import GenericInput from '../components/GenericInput';
 import RegisterBtn from '../components/RegisterBtn';
 import SubmitBtn from '../components/SubmitBtn';
-import LoginContext from '../context/LoginContext';
+import UserContext from '../context/UserContext';
 import '../style/Login.css';
+import loginValidations from '../utils/validations';
 
 function Login() {
-  const { email, setEmail, password, setPassword } = useContext(LoginContext);
-  const [isDisabled, setIsDisabled] = useState(true);
+  const { email, setEmail, password, setPassword } = useContext(UserContext);
   const obj = { email, password };
-  const PASSWORDLENGTH = 6;
-  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
-
-  useEffect(() => {
-    if (password !== undefined && password.length >= PASSWORDLENGTH && emailRegex) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
-  }, [password, emailRegex]);
 
   return (
     <section className="wrapper">
@@ -40,7 +30,7 @@ function Login() {
             setter={ setPassword }
           />
           <SubmitBtn
-            isDisable={ isDisabled }
+            isDisable={ loginValidations(email, password) }
             testid="common_login__button-login"
             routeSuffix="login"
             sendObject={ obj }

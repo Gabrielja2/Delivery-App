@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import UserContext from './LoginContext';
+import UserContext from './UserContext';
 
-function LoginProvider({ children }) {
-  const [email, setEmail] = useState();
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
+function UserProvider({ children }) {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
 
   const contextUser = useMemo(() => ({
     name,
@@ -23,8 +23,8 @@ function LoginProvider({ children }) {
   );
 }
 
-export default LoginProvider;
+export default UserProvider;
 
-LoginProvider.propTypes = {
+UserProvider.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object),
 }.isRequired;

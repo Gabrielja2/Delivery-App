@@ -2,18 +2,17 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import React from 'react';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import LoginProvider from './context/LoginProvider';
+import UserProvider from './context/UserProvider';
 
 function App() {
   return (
     <Switch>
-      <Route path="/register" component={ Register } />
-      <LoginProvider>
-        <Redirect to="/login">
-          <Route exact path="/" component={ Login } />
-        </Redirect>
+      <UserProvider>
+        <Route exact path="/" render={ () => <Redirect to="/login" /> } />
         <Route path="/login" component={ Login } />
-      </LoginProvider>
+        <Route path="/register" component={ Register } />
+      </UserProvider>
+
     </Switch>
 
   );
