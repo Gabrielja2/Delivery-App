@@ -1,16 +1,19 @@
 const { User } = require('../../database/models');
 const errorGenerate = require('../utils/errorGenerate');
 
-const findUser = async (email) => {
-  const user = await User.findOne({ where: { email } });
+const findUserById = async (id) => {
+  const user = await User.findOne({
+    where: { id },
+    attributes: { exclude: ['password'] },
+  });
 
-  if (!user) return undefined;
+  if (!user) throw errorGenerate(404, 'User not found');
 
-  return user.email;
+  return user;
 };
 
 const create = async ({ name, email, password, role }) => {
-  const checkUser = await findUser(email);
+  const checkUser = await User.findOne({ where: { email } });
 
   if (checkUser) throw errorGenerate(401, 'User already exists');
 
@@ -20,5 +23,6 @@ const create = async ({ name, email, password, role }) => {
 };
 
 module.exports = {
+  findUserById,
   create,
 };
