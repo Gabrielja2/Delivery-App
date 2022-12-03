@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-// const errorGenerate = require('./errorGenerate');
+require('dotenv');
 
 const TOKEN_SECRET_KEY = process.env.JWT_SECRET || 'secret';
 
@@ -16,7 +16,7 @@ const generateToken = (payload) => {
 
 const authenticateToken = async (token) => {
     const validateToken = jwt.verify(token, TOKEN_SECRET_KEY);
-
+    
     return validateToken;
 };
 
