@@ -15,7 +15,6 @@ const createValidUser = {
   name: 'Vitinho delivery app CTO',
   email: 'vitor@deliveryapp.com',
   password: 'banana123',
-  role: 'seller'
 }
 
 const createInvalidPassword = {

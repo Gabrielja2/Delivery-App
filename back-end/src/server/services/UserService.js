@@ -13,7 +13,7 @@ const findUserById = async (id) => {
   return user;
 };
 
-const create = async ({ name, email, password, role }) => {
+const create = async ({ name, email, password, role = 'customer' }) => {
   const checkUser = await User.findOne({ where: { email } });
   
   if (checkUser) throw errorGenerate(409, 'User already exists');
