@@ -1,3 +1,4 @@
+const md5 = require('md5');
 const { User } = require('../../database/models');
 const errorGenerate = require('../utils/errorGenerate');
 
@@ -14,11 +15,12 @@ const findUserById = async (id) => {
 
 const create = async ({ name, email, password, role }) => {
   const checkUser = await User.findOne({ where: { email } });
+  
+  if (checkUser) throw errorGenerate(409, 'User already exists');
 
-  if (checkUser) throw errorGenerate(401, 'User already exists');
-
-  const newUser = User.create({ name, email, password, role });
-
+  const hashPass = md5(password);
+  
+  const newUser = await User.create({ name, email, password: hashPass, role }); // model recebe a senha hasheada
   return newUser;
 };
 
