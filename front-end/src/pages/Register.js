@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import EmailInput from '../components/EmailInput';
 import GenericInput from '../components/GenericInput';
 import Button from '../components/Button';
 import UserContext from '../context/UserContext';
 import { registerValidations } from '../utils/validations';
 import '../style/Login.css';
+import { requestRegister } from '../services/requests';
 
 function Register() {
   const {
@@ -14,6 +15,17 @@ function Register() {
     setPassword,
     name,
     setName } = useContext(UserContext);
+  const [message, setMessage] = useState('');
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await requestRegister({ name, email, password });
+    } catch ({ response }) {
+      setMessage(response.data.message);
+      console.error(response);
+    }
+  };
 
   return (
     <section className="wrapper">
@@ -41,11 +53,14 @@ function Register() {
             placeholder="******"
             setter={ setPassword }
           />
+          {
+            message && <p>{ message }</p> //  mensagem do erro
+          }
           <Button
             testid="common_register__button-register"
             btnName="Cadastrar"
             type="submit"
-            // onClick={ handleSubmit }
+            onClick={ handleOnSubmit }
             isDisable={ registerValidations(email, password, name) }
           />
         </form>
