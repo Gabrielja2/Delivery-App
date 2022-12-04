@@ -19,8 +19,6 @@ chai.use(chaiHttp);
 describe('POST /login', function () {
   let chaiHttpResponse;
 
-  // beforeEach(() => sinon.stub(User, 'findOne').resolves(userMock));
-
   afterEach(() => sinon.restore());
 it('Testa se é possível fazer login com sucesso', async function () {
   sinon.stub(User, 'findOne').resolves(userMock)
