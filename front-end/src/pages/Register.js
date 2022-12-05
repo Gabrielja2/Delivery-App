@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import EmailInput from '../components/EmailInput';
 import GenericInput from '../components/GenericInput';
 import Button from '../components/Button';
@@ -15,15 +16,21 @@ function Register() {
     setPassword,
     name,
     setName } = useContext(UserContext);
-  const [message, setMessage] = useState('');
+  const [errorRequisiton, setErrorRequisition] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
+  const navigate = useHistory();
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      await requestRegister({ name, email, password });
+      const data = await requestRegister({ name, email, password });
+      if (data) {
+        localStorage.setItem('token', data.token);
+        navigate.push('/customer/products');
+      }
     } catch ({ response }) {
-      setMessage(response.data.message);
-      console.error(response);
+      setErrorMessage(response.data.message);
+      setErrorRequisition(true);
     }
   };
 
@@ -53,9 +60,13 @@ function Register() {
             placeholder="******"
             setter={ setPassword }
           />
-          {
-            message && <p>{ message }</p> //  mensagem do erro
-          }
+          {errorRequisiton && (
+            <span
+              data-testid="common_register__element-invalid_register"
+            >
+              {errorMessage}
+            </span>
+          )}
           <Button
             testid="common_register__button-register"
             btnName="Cadastrar"
