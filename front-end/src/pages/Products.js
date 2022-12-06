@@ -10,15 +10,13 @@ function Products() {
   useEffect(() => {
     async function fetch() {
       const token = localStorage.getItem('token');
-      console.log('token', token);
       const response = await requestData('/products', token);
-      console.log('response', response);
+      console.log(response);
       setProducts(response);
-      console.log('toaki', products);
     }
 
     fetch();
-  }, []);
+  }, [setProducts]);
 
   return (
     <section>

@@ -13,7 +13,7 @@ const login = async ({ email, password }) => {
   const { id, role, name } = user;
   const token = generateToken({ id, role });
 
-  return {token, name}; 
+  return { token, name }; 
 };
 
 module.exports = {
