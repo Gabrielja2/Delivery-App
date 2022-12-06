@@ -18,7 +18,8 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { token, name } = await requestLogin('/login', { email, password });
+      const data = await requestLogin('/login', { email, password });
+      const { token, name } = data;
 
       localStorage.setItem('token', token);
       localStorage.setItem('name', name);
