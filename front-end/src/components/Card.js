@@ -4,19 +4,45 @@ import Button from './Button';
 import GenericInput from './GenericInput';
 
 function Card({ url, alt, id, name, price, inputValue }) {
+  console.log(id);
   return (
     <div>
-      <p>{ price }</p>
+      <p data-testid={ `customer_products__element-card-price-${String(id)}` }>
+        R$
+        {' '}
+        { price }
+      </p>
 
-      <figure data-testid={ `customer_products__element-card-price-${String(id)}` }>
-        <img src={ url } alt={ alt } />
+      <figure>
+        <img
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          src={ url }
+          alt={ alt }
+        />
       </figure>
 
-      <p>{ name }</p>
+      <p
+        data-testid={ `customer_products__element-card-title-${id}` }
+      >
+        { name }
+      </p>
 
-      <Button type="button">+</Button>
-      <GenericInput value={ inputValue } />
-      <Button type="button q">-</Button>
+      <Button
+        type="button"
+        testid={ `customer_products__button-card-add-item-${id}` }
+      >
+        +
+      </Button>
+      <GenericInput
+        testid={ `customer_products__input-card-quantity-${id}` }
+        value={ inputValue }
+      />
+      <Button
+        type="button"
+        testid={ `customer_products__button-card-rm-item-${id}` }
+      >
+        -
+      </Button>
     </div>
   );
 }
