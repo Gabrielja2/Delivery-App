@@ -6,7 +6,7 @@ import Button from '../components/Button';
 import UserContext from '../context/UserContext';
 import { registerValidations } from '../utils/validations';
 import '../style/Login.css';
-import { requestRegister } from '../services/requests';
+import { requestLogin, requestRegister } from '../services/requests';
 
 function Register() {
   const {
@@ -24,8 +24,11 @@ function Register() {
     e.preventDefault();
     try {
       const data = await requestRegister({ name, email, password });
+      const { token } = await requestLogin('/login', { email, password });
+
+      localStorage.setItem('name', name);
       if (data) {
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('token', token);
         navigate.push('/customer/products');
       }
     } catch ({ response }) {
