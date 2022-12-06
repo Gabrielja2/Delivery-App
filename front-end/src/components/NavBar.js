@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function NavBar({ user }) {
   const navigation = useHistory();
@@ -12,13 +12,13 @@ function NavBar({ user }) {
 
   return (
     <nav>
-      <a href={ navigation.push('/customer/products') }>PRODUTOS</a>
-      <a href={ navigation.push('/customer/orders') }>MEUS PEDIDOS</a>
-      <a href={ navigation.push('/customer') }>
-        Logged as
-        {user}
-      </a>
-      <a href={ handleOnLogout }>Sair</a>
+      <Link to="/customer/products">Produtos</Link>
+      <Link to="/customer/orders">Meus Pedidos</Link>
+      <span>
+        Logado como
+        { user }
+      </span>
+      <button type="button" onClick={ handleOnLogout }>Sair</button>
     </nav>
   );
 }

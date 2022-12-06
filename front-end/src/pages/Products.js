@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
-import { requestProducts } from '../services/requests';
-// import UserContext from '../context/UserContext';
+import { requestData } from '../services/requests';
+import UserContext from '../context/UserContext';
 
 function Products() {
-  const [products, setProducts] = useState([]);
+  const { products, setProducts, name } = useContext(UserContext);
 
   useEffect(() => {
-    try {
-      const response = requestProducts();
-
+    async function fetch() {
+      const response = await requestData('/products');
+      console.log(response);
       setProducts(response);
-    } catch (error) {
-      console.error(error);
     }
+
+    fetch();
   }, []);
 
   return (
     <section>
-      <NavBar />
+      <NavBar user={ name } />
       <section>
         {
           products.map((p) => (

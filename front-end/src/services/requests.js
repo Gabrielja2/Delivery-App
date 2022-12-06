@@ -24,10 +24,4 @@ export const requestRegister = async (body) => {
   return data;
 };
 
-export const requestProducts = async () => {
-  const { data } = await api.get('/products');
-
-  return data;
-};
-
 export default api;

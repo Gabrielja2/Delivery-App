@@ -18,12 +18,11 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await requestLogin('/login', { email, password });
+      const { token, name } = await requestLogin('/login', { email, password });
 
-      if (data) {
-        localStorage.setItem('token', data.token);
-        navigate.push('/customer/products');
-      }
+      localStorage.setItem('token', token);
+      localStorage.setItem('name', name);
+      navigate.push('/customer/products');
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);
