@@ -9,9 +9,12 @@ function Products() {
 
   useEffect(() => {
     async function fetch() {
-      const response = await requestData('/products');
-      console.log(response);
+      const token = localStorage.getItem('token');
+      console.log('token', token);
+      const response = await requestData('/products', token);
+      console.log('response', response);
       setProducts(response);
+      console.log('toaki', products);
     }
 
     fetch();
@@ -29,7 +32,8 @@ function Products() {
               name={ p.name }
               price={ p.price }
               url={ p.url_image }
-            />))
+            />
+          ))
         }
       </section>
     </section>

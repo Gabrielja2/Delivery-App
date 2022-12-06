@@ -30,7 +30,7 @@ function NavBar({ user }) {
         data-testid="customer_products__element-navbar-user-full-name"
       >
         Logado como
-        { user }
+        { user || localStorage.getItem('name') }
       </span>
       <button
         data-testid="customer_products__element-navbar-link-logout"

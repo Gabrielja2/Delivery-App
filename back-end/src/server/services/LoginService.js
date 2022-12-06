@@ -10,10 +10,10 @@ const login = async ({ email, password }) => {
   const compare = comparePass(password, user.password);
   if (!compare) throw new Error('Incorrect email or password');
   
-  const { id, role } = user;
+  const { id, role, name } = user;
   const token = generateToken({ id, role });
 
-  return token; 
+  return {token, name}; 
 };
 
 module.exports = {
