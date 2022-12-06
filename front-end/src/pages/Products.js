@@ -11,7 +11,7 @@ function Products() {
     async function fetch() {
       const token = localStorage.getItem('token');
       const response = await requestData('/products', token);
-      console.log(response);
+
       setProducts(response);
     }
 
