@@ -20,7 +20,7 @@ function Products() {
   return (
     <section>
       <NavBar user={ JSON.parse(localStorage.getItem('user')).name } />
-      <section>
+      <section className="products-container">
         {
           products.map((p) => (
             <Card

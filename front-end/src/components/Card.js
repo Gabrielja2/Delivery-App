@@ -8,21 +8,31 @@ function Card({ url, alt, id, name, price }) {
   const [inputValue, setInputValue] = useState(0);
   const { cart, setCart } = useContext(UserContext);
 
-  const handleOnClickAdd = () => {
+  const handleOnClickAdd = (event) => {
+    const productPrice = event.target.parentNode.firstChild.innerText;
+    const productName = event.target.parentNode.children[2].innerText;
+    
     setInputValue((prev) => prev + 1);
+    const findProduct = cart.find((p) => p.productName === productName)
+    if(findProduct) {
+
+    }
+    setCart([...cart, { productPrice, productName, quantity: 1 }]);
   };
 
   const handleOnClickRemove = (event) => {
+    const productPrice = event.target.parentNode.firstChild.innerText;
+    const productName = event.target.parentNode.children[2].innerText;
+
     setInputValue((prev) => prev - 1);
     if (inputValue <= 0) {
       setInputValue(0);
     }
-    // console.log(event.target.parentNode.firstChild.innerText);
-    console.log(event.target.parentNode.children[2].innerText);
+    const removedProduct = cart.filter((p) => p !== )
   };
 
   return (
-    <div>
+    <div className="card-container">
       <p data-testid={ `customer_products__element-card-price-${String(id)}` }>
         { price.replace('.', ',') }
       </p>
