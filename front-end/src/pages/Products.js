@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
 import { requestData } from '../services/requests';
@@ -6,11 +6,6 @@ import UserContext from '../context/UserContext';
 
 function Products() {
   const { products, setProducts } = useContext(UserContext);
-  const [inputValue, setInputValue] = useState(0);
-
-  const handleOnChange = (value) => {
-    setInputValue(value);
-  };
 
   useEffect(() => {
     async function fetch() {
@@ -34,8 +29,6 @@ function Products() {
               name={ p.name }
               price={ p.price }
               url={ p.urlImage }
-              inputValue={ inputValue }
-              onChange={ handleOnChange }
             />
           ))
         }
