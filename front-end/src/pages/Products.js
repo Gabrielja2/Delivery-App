@@ -3,6 +3,7 @@ import Card from '../components/Card';
 import NavBar from '../components/NavBar';
 import { requestData } from '../services/requests';
 import UserContext from '../context/UserContext';
+import '../style/Products.css';
 
 function Products() {
   const { products, setProducts } = useContext(UserContext);
@@ -25,7 +26,7 @@ function Products() {
   return (
     <section>
       <NavBar user={ JSON.parse(localStorage.getItem('user')).name } />
-      <section>
+      <section className="products-container">
         {
           products.map((p) => (
             <Card
