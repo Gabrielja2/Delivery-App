@@ -4,7 +4,6 @@ import Button from './Button';
 import GenericInput from './GenericInput';
 
 function Card({ url, alt, id, name, price, inputValue }) {
-  console.log(id);
   return (
     <div>
       <p data-testid={ `customer_products__element-card-price-${String(id)}` }>

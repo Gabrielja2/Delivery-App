@@ -6,8 +6,7 @@ function NavBar({ user }) {
   const navigation = useHistory();
 
   const handleOnLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
+    localStorage.removeItem('user');
     navigation.push('/');
   };
 
@@ -29,8 +28,7 @@ function NavBar({ user }) {
       <span
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        Logado como
-        { user || localStorage.getItem('name') }
+        { user || JSON.parse(localStorage.getItem('user')).name }
       </span>
       <button
         data-testid="customer_products__element-navbar-link-logout"

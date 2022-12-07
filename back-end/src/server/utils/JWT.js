@@ -1,21 +1,16 @@
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
 require('dotenv');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
-const TOKEN_SECRET_KEY = process.env.JWT_SECRET || 'secret';
+const jwtKey = fs.readFileSync(`${__dirname}/../../../jwt.evaluation.key`, 'utf-8');
 
-const generateToken = (payload) => {    
-    const jwtConfig = {
-      expiresIn: '7d',
-      algorithm: 'HS256',
-    };
-
-    const token = jwt.sign(payload, TOKEN_SECRET_KEY, jwtConfig);
+const generateToken = (payload) => {  
+    const token = jwt.sign(payload, jwtKey);
     return token;
 };
 
 const authenticateToken = async (token) => {
-    const validateToken = jwt.verify(token, TOKEN_SECRET_KEY);
+    const validateToken = jwt.verify(token, jwtKey);
     
     return validateToken;
 };

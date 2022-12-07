@@ -19,10 +19,8 @@ function Login() {
     e.preventDefault();
     try {
       const data = await requestLogin('/login', { email, password });
-      const { token, name } = data;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('name', name);
+      localStorage.setItem('user', JSON.stringify(data));
       navigate.push('/customer/products');
     } catch ({ response }) {
       setErrorMessage(response.data.message);

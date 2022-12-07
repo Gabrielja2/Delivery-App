@@ -23,14 +23,11 @@ function Register() {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await requestRegister({ name, email, password });
-      const { token } = await requestLogin('/login', { email, password });
+      await requestRegister({ name, email, password });
+      const data = await requestLogin('/login', { email, password });
 
-      localStorage.setItem('name', name);
-      if (data) {
-        localStorage.setItem('token', token);
-        navigate.push('/customer/products');
-      }
+      localStorage.setItem('user', JSON.stringify(data));
+      navigate.push('/customer/products');
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);

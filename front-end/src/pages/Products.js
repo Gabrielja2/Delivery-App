@@ -5,7 +5,7 @@ import { requestData } from '../services/requests';
 import UserContext from '../context/UserContext';
 
 function Products() {
-  const { products, setProducts, name } = useContext(UserContext);
+  const { products, setProducts } = useContext(UserContext);
 
   useEffect(() => {
     async function fetch() {
@@ -20,7 +20,7 @@ function Products() {
 
   return (
     <section>
-      <NavBar user={ name } />
+      <NavBar user={ JSON.parse(localStorage.getItem('user')).name } />
       <section>
         {
           products.map((p) => (
