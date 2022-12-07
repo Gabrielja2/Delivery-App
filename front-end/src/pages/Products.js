@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Card from '../components/Card';
 import NavBar from '../components/NavBar';
 import { requestData } from '../services/requests';
@@ -6,6 +6,11 @@ import UserContext from '../context/UserContext';
 
 function Products() {
   const { products, setProducts } = useContext(UserContext);
+  const [inputValue, setInputValue] = useState(0);
+
+  const handleOnChange = (value) => {
+    setInputValue(value);
+  };
 
   useEffect(() => {
     async function fetch() {
@@ -17,7 +22,6 @@ function Products() {
 
     fetch();
   }, [setProducts]);
-
   return (
     <section>
       <NavBar user={ JSON.parse(localStorage.getItem('user')).name } />
@@ -29,7 +33,9 @@ function Products() {
               key={ p.id }
               name={ p.name }
               price={ p.price }
-              url={ p.url_image }
+              url={ p.urlImage }
+              inputValue={ inputValue }
+              onChange={ handleOnChange }
             />
           ))
         }
