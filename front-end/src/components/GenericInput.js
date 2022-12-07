@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function GenericInput({ type, selector, fieldName, placeholder, setter, testid }) {
+function GenericInput({ type, selector, fieldName, placeholder, setter, testid, value }) {
   return (
     <label htmlFor={ selector }>
       { fieldName}
       <input
+        value={ value }
         data-testid={ testid }
         type={ type }
         id={ selector }

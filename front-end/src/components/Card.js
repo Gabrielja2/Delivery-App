@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 import GenericInput from './GenericInput';
 
-function Card({ url, alt, id, name, price, inputValue }) {
+function Card({ url, alt, id, name, price, inputValue, onChange }) {
   return (
     <div>
       <p data-testid={ `customer_products__element-card-price-${String(id)}` }>
-        R$
-        {' '}
-        { price }
+        { price.replace('.', ',') }
       </p>
 
       <figure>
@@ -35,6 +33,7 @@ function Card({ url, alt, id, name, price, inputValue }) {
       <GenericInput
         testid={ `customer_products__input-card-quantity-${id}` }
         value={ inputValue }
+        setter={ onChange }
       />
       <Button
         type="button"
