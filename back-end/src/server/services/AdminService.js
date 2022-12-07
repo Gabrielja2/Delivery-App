@@ -9,7 +9,7 @@ const create = async ({ name, email, password, role }) => {
 
   const hashPass = md5(password);
   
-  const newUser = await User.create({ name, email, password: hashPass, role: role || "customer" });
+  const newUser = await User.create({ name, email, password: hashPass, role: role || 'customer' });
   return newUser;
 };
 

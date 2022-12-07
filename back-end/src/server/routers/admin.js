@@ -7,5 +7,4 @@ const adminRouter = express.Router();
 
 adminRouter.post('/register', validateToken, validateRegisterBody, create);
 
-
 module.exports = adminRouter;
