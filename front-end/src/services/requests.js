@@ -8,10 +8,10 @@ export const setToken = (token) => {
   api.defaults.headers.common.Authorization = token;
 };
 
-export const requestData = async (endpoint, token) => {
+export const requestData = async (endpoint) => {
   const { data } = await api.get(
     endpoint,
-    { headers: { authorization: token } },
+    { headers: { Authorization: JSON.parse(localStorage.getItem('user')).token } },
   );
   return data;
 };
