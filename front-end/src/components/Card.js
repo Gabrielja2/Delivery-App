@@ -5,7 +5,7 @@ import GenericInput from './GenericInput';
 
 function Card({ url, alt, id, name, price, inputValue, onChange }) {
   return (
-    <div>
+    <div className="card-container">
       <p data-testid={ `customer_products__element-card-price-${String(id)}` }>
         { price.replace('.', ',') }
       </p>
@@ -13,6 +13,8 @@ function Card({ url, alt, id, name, price, inputValue, onChange }) {
       <figure>
         <img
           data-testid={ `customer_products__img-card-bg-image-${id}` }
+          width="60%"
+          height="200px"
           src={ url }
           alt={ alt }
         />
@@ -25,22 +27,20 @@ function Card({ url, alt, id, name, price, inputValue, onChange }) {
       </p>
 
       <Button
+        btnName="+"
         type="button"
         testid={ `customer_products__button-card-add-item-${id}` }
-      >
-        +
-      </Button>
+      />
       <GenericInput
         testid={ `customer_products__input-card-quantity-${id}` }
         value={ inputValue }
         setter={ onChange }
       />
       <Button
+        btnName="-"
         type="button"
         testid={ `customer_products__button-card-rm-item-${id}` }
-      >
-        -
-      </Button>
+      />
     </div>
   );
 }
