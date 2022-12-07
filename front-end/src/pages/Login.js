@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import EmailInput from '../components/EmailInput';
 import GenericInput from '../components/GenericInput';
 import RegisterBtn from '../components/RegisterBtn';
 import Button from '../components/Button';
@@ -19,9 +18,13 @@ function Login() {
     e.preventDefault();
     try {
       const data = await requestLogin('/login', { email, password });
-
       localStorage.setItem('user', JSON.stringify(data));
-      navigate.push('/customer/products');
+
+      if (data.role === 'administrator') {
+        navigate.push('/admin/manage');
+      } else {
+        navigate.push('/customer/products');
+      }
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);
@@ -34,9 +37,13 @@ function Login() {
         <img alt="Trybe Delivery App" />
         <form className="form">
           <h1>App Delivery</h1>
-          <EmailInput
+          <GenericInput
             testid="common_login__input-email"
-            setEmail={ setEmail }
+            type="email"
+            selector="email"
+            fieldName="Email"
+            placeholder="dgite seu email"
+            setter={ setEmail }
           />
           <GenericInput
             testid="common_login__input-password"

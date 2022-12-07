@@ -11,6 +11,7 @@ app.get('/coffee', (_req, res) => res.status(418).end());
 app.use(express.static('public'));
 app.use('/login', router.loginRouter);
 app.use('/user', router.userRouter);
+app.use('/admin', router.adminRouter);
 app.use('/products', router.productRouter);
 
 app.use(errorMiddleware);
