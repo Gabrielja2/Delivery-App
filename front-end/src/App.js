@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import UserProvider from './context/UserProvider';
 import Products from './pages/Products';
+import Manage from './pages/Manage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/customer/products" component={ Products } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
+        <Route path="/admin/manage" component={ Manage } />
       </UserProvider>
 
     </Switch>

@@ -19,9 +19,13 @@ function Login() {
     e.preventDefault();
     try {
       const data = await requestLogin('/login', { email, password });
-
       localStorage.setItem('user', JSON.stringify(data));
-      navigate.push('/customer/products');
+
+      if (data.role === 'administrator') {
+        navigate.push('/admin/manage');
+      } else {
+        navigate.push('/customer/products');
+      }
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);
