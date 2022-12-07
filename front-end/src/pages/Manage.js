@@ -1,32 +1,30 @@
-import React, { useContext, useState } from 'react';
-import EmailInput from '../components/EmailInput';
+import React, { /* useContext,  */useState } from 'react';
 import GenericInput from '../components/GenericInput';
 import AdmNavbar from '../components/AdmNavbar';
 import Button from '../components/Button';
-import UserContext from '../context/UserContext';
-import { admRegisterValidations } from '../utils/validations';
+// import UserContext from '../context/UserContext';
+import { registerValidations } from '../utils/validations';
 import '../style/Login.css';
-import { requestRegister } from '../services/requests';
+import { admRequestRegister } from '../services/requests';
 
 function Manage() {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    name,
-    setName,
-    role,
-    /* setRole */ } = useContext(UserContext);
   const [errorRequisiton, setErrorRequisition] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  // const {
+  //   email,
+  //   setEmail,
+  //   password,
+  //   setPassword,
+  //   name,
+  //   setName } = useContext(UserContext);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newUser = await requestRegister({ name, email, password, role });
-
-      localStorage.setItem('user', JSON.stringify(newUser));
+      await admRequestRegister({ name, email, password });
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);
@@ -48,9 +46,13 @@ function Manage() {
             placeholder="Nome e sobrenome"
             setter={ setName }
           />
-          <EmailInput
+          <GenericInput
             testid="admin_manage__input-email"
-            setEmail={ setEmail }
+            type="email"
+            selector="email"
+            fieldName="Email"
+            placeholder="dgite seu email"
+            setter={ setEmail }
           />
           <GenericInput
             testid="admin_manage__input-password"
@@ -63,6 +65,7 @@ function Manage() {
 
           Tipo
           <select
+            defaultValue="customer"
             data-testid="admin_manage__select-role"
             name="Tipo"
           >
@@ -82,7 +85,7 @@ function Manage() {
             btnName="Cadastrar"
             type="submit"
             onClick={ handleOnSubmit }
-            isDisable={ admRegisterValidations(name, email, password, role) }
+            isDisable={ registerValidations(email, password, name) }
           />
         </form>
       </section>

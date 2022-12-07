@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import EmailInput from '../components/EmailInput';
 import GenericInput from '../components/GenericInput';
 import Button from '../components/Button';
 import UserContext from '../context/UserContext';
@@ -48,9 +47,13 @@ function Register() {
             placeholder="Seu nome"
             setter={ setName }
           />
-          <EmailInput
+          <GenericInput
             testid="common_register__input-email"
-            setEmail={ setEmail }
+            type="email"
+            selector="email"
+            fieldName="Email"
+            placeholder="dgite seu email"
+            setter={ setEmail }
           />
           <GenericInput
             testid="common_register__input-password"

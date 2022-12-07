@@ -27,4 +27,10 @@ export const requestRegister = async (body) => {
   return data;
 };
 
+export const admRequestRegister = async (body) => {
+  const { data } = await api.post('/admin/register', body);
+
+  return data;
+};
+
 export default api;
