@@ -1,48 +1,62 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 import GenericInput from './GenericInput';
-// import UserContext from '../context/UserContext';
+import UserContext from '../context/UserContext';
 
 function Card({ url, alt, id, name, price }) {
   const [inputValue, setInputValue] = useState(0);
-  // const { cart, setCart } = useContext(UserContext);
-  const [product, setProduct] = useState({
-    productPrice: 0,
-    productName: '',
-    quantity: 0,
-  });
+  const { cart, setCart } = useContext(UserContext);
+  const [product, setProduct] = useState();
 
   const handleOnClickAdd = (event) => {
     event.preventDefault();
-    setInputValue((prev) => prev + 1);
+    const value = inputValue + 1;
+    setInputValue(value);
 
     const productPrice = event.target.parentNode.firstChild.innerText;
     const productName = event.target.parentNode.children[2].innerText;
-    setProduct({ productName, productPrice, quantity: inputValue });
+
+    setProduct({ productName, productPrice, quantity: value });
   };
 
   const handleOnClickRemove = (event) => {
     event.preventDefault();
+    let value = inputValue;
+
+    if (inputValue !== 0) {
+      value = inputValue - 1;
+    }
+    // const value = inputValue - 1;
     const productPrice = event.target.parentNode.firstChild.innerText;
     const productName = event.target.parentNode.children[2].innerText;
 
-    setInputValue((prev) => prev - 1);
-    if (inputValue <= 0) {
-      setInputValue(0);
-      setProduct([]);
-    }
+    setInputValue(value);
 
-    setProduct({ productName, productPrice, quantity: inputValue });
+    setProduct({ productName, productPrice, quantity: value });
   };
 
   useEffect(() => {
-    setProduct({ ...product, quantity: inputValue });
-  }, [inputValue]);
+    if (product) {
+      const findProduct = cart.findIndex((p) => p.productName === product?.productName);
+      const magicNumber = -1;
+
+      if (product.quantity === 0) {
+        const filterProducts = cart.filter((p) => p.productName !== product?.productName);
+        return setCart([...filterProducts]);
+      }
+      if (findProduct === magicNumber) {
+        setCart([...cart, product]);
+      } else {
+        const filterProducts = cart.filter((p) => p.productName !== product?.productName);
+        setCart([...filterProducts, product]);
+      }
+    }
+  }, [product]);
 
   return (
     <div className="card-container">
-      <p data-testid={ `customer_products__element-card-price-${String(id)}` }>
+      <p data-testid={ `customer_products__element-card-price-${id}` }>
         { price.replace('.', ',') }
       </p>
 
