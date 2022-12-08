@@ -8,6 +8,6 @@ export const loginValidations = (email, password) => {
 export const registerValidations = (email, password, name) => {
   const minNameLength = 12;
   const result = !(!loginValidations(email, password) && name.length >= minNameLength);
-  console.log('toaki', result);
+  // console.log('toaki', result);
   return result;
 };

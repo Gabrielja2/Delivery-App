@@ -2,7 +2,6 @@ import React, { /* useContext,  */useState } from 'react';
 import GenericInput from '../components/GenericInput';
 import AdmNavbar from '../components/AdmNavbar';
 import Button from '../components/Button';
-// import UserContext from '../context/UserContext';
 import { registerValidations } from '../utils/validations';
 import '../style/Login.css';
 import { admRequestRegister } from '../services/requests';
@@ -13,18 +12,12 @@ function Manage() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  // const {
-  //   email,
-  //   setEmail,
-  //   password,
-  //   setPassword,
-  //   name,
-  //   setName } = useContext(UserContext);
+  const [role, setRole] = useState('');
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      await admRequestRegister({ name, email, password });
+      await admRequestRegister({ name, email, password, role: role || 'customer' });
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);
@@ -65,9 +58,11 @@ function Manage() {
 
           Tipo
           <select
-            defaultValue="customer"
             data-testid="admin_manage__select-role"
-            name="Tipo"
+            name="role"
+            onChange={ (e) => setRole(e.target.value) }
+            value={ role }
+
           >
             <option value=""> </option>
             <option value="seller">Seller</option>
