@@ -49,6 +49,8 @@ function Card({ url, alt, id, name, price }) {
       <figure>
         <img
           data-testid={ `customer_products__img-card-bg-image-${id}` }
+          width="60%"
+          height="200px"
           src={ url }
           alt={ alt }
         />
@@ -62,11 +64,10 @@ function Card({ url, alt, id, name, price }) {
 
       <Button
         onClick={ handleOnClickAdd }
+        btnName="+"
         type="button"
         testid={ `customer_products__button-card-add-item-${id}` }
-      >
-        +
-      </Button>
+      />
       <GenericInput
         testid={ `customer_products__input-card-quantity-${id}` }
         value={ inputValue }
@@ -74,11 +75,10 @@ function Card({ url, alt, id, name, price }) {
       />
       <Button
         onClick={ handleOnClickRemove }
+        btnName="-"
         type="button"
         testid={ `customer_products__button-card-rm-item-${id}` }
-      >
-        -
-      </Button>
+      />
     </div>
   );
 }

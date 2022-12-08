@@ -1,32 +1,23 @@
-import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { /* useContext,  */useState } from 'react';
 import GenericInput from '../components/GenericInput';
+import AdmNavbar from '../components/AdmNavbar';
 import Button from '../components/Button';
-import UserContext from '../context/UserContext';
 import { registerValidations } from '../utils/validations';
 import '../style/Login.css';
-import { requestLogin, requestRegister } from '../services/requests';
+import { admRequestRegister } from '../services/requests';
 
-function Register() {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    name,
-    setName } = useContext(UserContext);
+function Manage() {
   const [errorRequisiton, setErrorRequisition] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
-  const navigate = useHistory();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      await requestRegister({ name, email, password });
-      const data = await requestLogin('/login', { email, password });
-
-      localStorage.setItem('user', JSON.stringify(data));
-      navigate.push('/customer/products');
+      await admRequestRegister({ name, email, password, role: role || 'customer' });
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);
@@ -35,20 +26,21 @@ function Register() {
 
   return (
     <section className="wrapper">
+      <AdmNavbar user={ JSON.parse(localStorage.getItem('user')).name } />
       <section className="user-login-area">
         <img alt="Trybe Delivery App" />
         <form className="form">
-          <h1>Cadastro</h1>
+          <h1>Cadastrar novo usuário</h1>
           <GenericInput
-            testid="common_register__input-name"
+            testid="admin_manage__input-name"
             type="text"
             selector="name"
             fieldName="Name"
-            placeholder="Seu nome"
+            placeholder="Nome e sobrenome"
             setter={ setName }
           />
           <GenericInput
-            testid="common_register__input-email"
+            testid="admin_manage__input-email"
             type="email"
             selector="email"
             fieldName="Email"
@@ -56,22 +48,35 @@ function Register() {
             setter={ setEmail }
           />
           <GenericInput
-            testid="common_register__input-password"
+            testid="admin_manage__input-password"
             type="password"
             selector="password"
             fieldName="Password"
             placeholder="******"
             setter={ setPassword }
           />
+
+          Tipo
+          <select
+            data-testid="admin_manage__select-role"
+            name="role"
+            onChange={ (e) => setRole(e.target.value) }
+            value={ role }
+
+          >
+            <option value=""> </option>
+            <option value="seller">Seller</option>
+          </select>
+
           {errorRequisiton && (
             <span
-              data-testid="common_register__element-invalid_register"
+              data-testid="admin_manage__element-invalid-register"
             >
               {errorMessage}
             </span>
           )}
           <Button
-            testid="common_register__button-register"
+            testid="admin_manage__button-register"
             btnName="Cadastrar"
             type="submit"
             onClick={ handleOnSubmit }
@@ -83,4 +88,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Manage;

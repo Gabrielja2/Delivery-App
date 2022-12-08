@@ -1,0 +1,12 @@
+.products-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.card-container {
+  border: 2px solid gray;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 28%;
+}
