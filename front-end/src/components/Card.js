@@ -7,20 +7,23 @@ import UserContext from '../context/UserContext';
 function Card({ url, alt, id, name, price }) {
   const [inputValue, setInputValue] = useState(0);
   const { cart, setCart } = useContext(UserContext);
+  const [product, setProduct] = useState({
+    productPrice: 0,
+    productName: '',
+    quantity: 0,
+  });
 
   const handleOnClickAdd = (event) => {
+    event.preventDefault();
+    setInputValue((prev) => prev + 1);
+
     const productPrice = event.target.parentNode.firstChild.innerText;
     const productName = event.target.parentNode.children[2].innerText;
-    
-    setInputValue((prev) => prev + 1);
-    const findProduct = cart.find((p) => p.productName === productName)
-    if(findProduct) {
-
-    }
-    setCart([...cart, { productPrice, productName, quantity: 1 }]);
+    setProduct({ productName, productPrice, quantity: inputValue });
   };
 
   const handleOnClickRemove = (event) => {
+    event.preventDefault();
     const productPrice = event.target.parentNode.firstChild.innerText;
     const productName = event.target.parentNode.children[2].innerText;
 
@@ -28,7 +31,8 @@ function Card({ url, alt, id, name, price }) {
     if (inputValue <= 0) {
       setInputValue(0);
     }
-    const removedProduct = cart.filter((p) => p !== )
+
+    setProduct({ productName, productPrice, quantity: inputValue });
   };
 
   return (
