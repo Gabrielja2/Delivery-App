@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 import GenericInput from './GenericInput';
@@ -30,10 +30,15 @@ function Card({ url, alt, id, name, price }) {
     setInputValue((prev) => prev - 1);
     if (inputValue <= 0) {
       setInputValue(0);
+      setProduct([]);
     }
 
     setProduct({ productName, productPrice, quantity: inputValue });
   };
+
+  useEffect(() => {
+    setProduct({ ...product, quantity: inputValue });
+  }, [inputValue]);
 
   return (
     <div className="card-container">
