@@ -4,9 +4,10 @@ import NavBar from '../components/NavBar';
 import { requestData } from '../services/requests';
 import UserContext from '../context/UserContext';
 import '../style/Products.css';
+import Button from '../components/Button';
 
 function Products() {
-  const { products, setProducts } = useContext(UserContext);
+  const { products, setProducts, cart, setTotal, total } = useContext(UserContext);
 
   useEffect(() => {
     async function fetch() {
@@ -18,6 +19,21 @@ function Products() {
 
     fetch();
   }, [setProducts]);
+
+  const sum = () => cart.reduce((acc, p) => {
+    const price = Number(p.productPrice.replace(',', '.'));
+
+    const mult = p.quantity * price;
+
+    acc = Number(acc) + Number(mult);
+
+    return acc;
+  }, 0);
+
+  useEffect(() => {
+    setTotal(sum());
+  }, [cart, setTotal]);
+
   return (
     <section>
       <NavBar user={ JSON.parse(localStorage.getItem('user')).name } />
@@ -34,6 +50,11 @@ function Products() {
           ))
         }
       </section>
+      <Button className="submit-btn">
+        {
+          total
+        }
+      </Button>
     </section>
   );
 }
