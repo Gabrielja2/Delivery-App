@@ -23,8 +23,9 @@ function Button({
 export default Button;
 
 Button.propTypes = {
-  routeSuffix: PropTypes.string,
-  sendObject: PropTypes.shape({}),
-  navigation: PropTypes.string,
+  type: PropTypes.string,
+  isDisable: PropTypes.boolean,
+  onClick: PropTypes.shape({}),
+  testid: PropTypes.string,
   btnName: PropTypes.string,
 }.isRequired;

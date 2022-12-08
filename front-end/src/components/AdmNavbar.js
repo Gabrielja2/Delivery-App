@@ -36,6 +36,5 @@ function NavBar({ user }) {
 export default NavBar;
 
 NavBar.propTypes = {
-  href: PropTypes.func,
   user: PropTypes.string,
 }.isRequired;
