@@ -28,7 +28,11 @@ export const requestRegister = async (body) => {
 };
 
 export const admRequestRegister = async (body) => {
-  const { data } = await api.post('/admin/register', body);
+  const { data } = await api.post(
+    '/admin/register',
+    body,
+    { headers: { Authorization: JSON.parse(localStorage.getItem('user')).token } },
+  );
 
   return data;
 };

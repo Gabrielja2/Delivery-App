@@ -14,14 +14,10 @@ function Manage() {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
 
-  const handleChange = (e) => {
-    setRole(e.target.value);
-  };
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-      await admRequestRegister({ name, email, password });
+      await admRequestRegister({ name, email, password, role: role || 'customer' });
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);
@@ -63,10 +59,9 @@ function Manage() {
           Tipo
           <select
             data-testid="admin_manage__select-role"
-            id="role-select"
             name="role"
+            onChange={ (e) => setRole(e.target.value) }
             value={ role }
-            onChange={ handleChange }
 
           >
             <option value=""> </option>
