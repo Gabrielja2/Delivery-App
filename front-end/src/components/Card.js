@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 import GenericInput from './GenericInput';
-import UserContext from '../context/UserContext';
+// import UserContext from '../context/UserContext';
 
 function Card({ url, alt, id, name, price }) {
   const [inputValue, setInputValue] = useState(0);
-  const { cart, setCart } = useContext(UserContext);
+  // const { cart, setCart } = useContext(UserContext);
   const [product, setProduct] = useState({
     productPrice: 0,
     productName: '',
