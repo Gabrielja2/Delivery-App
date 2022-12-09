@@ -6,7 +6,7 @@ function Card({ url, alt, id, name, price, total, product }) {
   const [quantity, setQuantity] = useState(product.quantity || 0);
 
   const calculateTotal = (cart) => {
-    if (cart.length) {
+    if (cart) {
       const soma = cart.reduce((sum, item) => sum + (item.quantity * item.price), 0);
       return soma;
     }
@@ -15,42 +15,43 @@ function Card({ url, alt, id, name, price, total, product }) {
 
   const handleClick = (value) => {
     if (value === '+') {
-      setQuantity(quantity + 1);
+      setQuantity(+quantity + 1);
     }
     if (value === '-' && quantity > 0) {
-      setQuantity(quantity - 1);
+      setQuantity(+quantity - 1);
+    }
+  };
+
+  const createCart = () => {
+    if (localStorage.getItem('carrinho')) {
+      let cart = JSON.parse(localStorage.getItem('carrinho'));
+      if (cart.some((p) => p.name === name)) {
+        cart = cart.reduce((acc, curr) => {
+          if (curr.name === name) {
+            curr.quantity = quantity;
+            return acc;
+          }
+          return acc;
+        }, cart);
+      } else {
+        cart = [
+          ...cart,
+          { name, price, quantity, id },
+        ];
+      }
+      const updatedCart = cart.filter((prod) => prod.quantity);
+      localStorage.setItem('carrinho', JSON.stringify(updatedCart));
+      total(calculateTotal(updatedCart));
+    } else {
+      localStorage.setItem(
+        'carrinho',
+        JSON.stringify([{ name, price, quantity }]),
+      );
+      total(calculateTotal([{ name, price, quantity }]));
     }
   };
 
   useEffect(() => {
-    const createCart = () => {
-      if (localStorage.getItem('cart')) {
-        let cart = JSON.parse(localStorage.getItem('cart'));
-        if (cart.some((p) => p.name === name)) {
-          cart = cart.reduce((acc, curr) => {
-            if (curr.name === name) {
-              curr.quantity = quantity;
-              return acc;
-            }
-            return acc;
-          }, cart);
-        } else {
-          cart = [
-            ...cart,
-            { name, price, quantity, id },
-          ];
-        }
-        const updatedCart = cart.filter((prod) => prod.quantity);
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
-        total(calculateTotal(updatedCart));
-      } else {
-        localStorage.setItem(
-          'cart',
-          JSON.stringify([{ name, price, quantity }]),
-        );
-        total(calculateTotal([{ name, price, quantity }]));
-      }
-    };
     createCart();
   }, [quantity]);
 

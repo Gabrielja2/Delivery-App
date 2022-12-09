@@ -12,20 +12,16 @@ function Products() {
   const navigate = useHistory();
 
   const getQuantity = () => {
-    if (localStorage.getItem('cart')) {
-      return JSON.parse(localStorage.getItem('cart'));
+    if (localStorage.getItem('carrinho')) {
+      return JSON.parse(localStorage.getItem('carrinho'));
     }
     return [];
   };
 
   useEffect(() => {
-    async function fetch() {
-      const token = localStorage.getItem('token');
-      const response = await requestData('/products', token);
-      setProducts(response);
-    }
-
-    fetch();
+    const token = localStorage.getItem('token');
+    requestData('/products', token)
+      .then((response) => setProducts(response));
   }, []);
 
   const handleCheckout = () => {
@@ -46,7 +42,9 @@ function Products() {
               price={ p.price }
               url={ p.urlImage }
               total={ (t) => setCartTotal(t) }
-              product={ getQuantity().find((prod) => prod.name === p.name) || 0 }
+              product={
+                (getQuantity().find((prod) => prod.name === p.name)) || 0
+              }
 
             />
           ))
