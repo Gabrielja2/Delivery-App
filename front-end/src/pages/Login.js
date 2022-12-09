@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import GenericInput from '../components/GenericInput';
 import RegisterBtn from '../components/RegisterBtn';
@@ -13,6 +13,22 @@ function Login() {
   const [errorRequisiton, setErrorRequisition] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const navigate = useHistory();
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      if (JSON.parse(user).role === 'admin') {
+        navigate.push('/admin/manage');
+      }
+
+      if (JSON.parse(user).role === 'customer') {
+        navigate.push('/customer/products');
+      }
+      if (JSON.parse(user).role === 'seller') {
+        navigate.push('/seller/products');
+      }
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
