@@ -5,18 +5,12 @@ import NavBar from '../components/NavBar';
 import { requestData } from '../services/requests';
 import UserContext from '../context/UserContext';
 import '../style/Products.css';
+import getQuantity from '../utils/getQuantity';
 
 function Products() {
   const { products, setProducts } = useContext(UserContext);
   const [cartTotal, setCartTotal] = useState(0);
   const navigate = useHistory();
-
-  const getQuantity = () => {
-    if (localStorage.getItem('carrinho')) {
-      return JSON.parse(localStorage.getItem('carrinho'));
-    }
-    return [];
-  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');

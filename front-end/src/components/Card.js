@@ -1,24 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import calculateTotal from '../utils/calculateTotal';
 
 function Card({ url, alt, id, name, price, total, product }) {
   console.log(product);
   const [quantity, setQuantity] = useState(product.quantity || 0);
 
-  const calculateTotal = (cart) => {
-    if (cart) {
-      const soma = cart.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-      return soma;
-    }
-    return 0;
-  };
-
   const handleClick = (value) => {
     if (value === '+') {
-      setQuantity(+quantity + 1);
+      setQuantity(quantity + 1);
     }
     if (value === '-' && quantity > 0) {
-      setQuantity(+quantity - 1);
+      setQuantity(quantity - 1);
     }
   };
 
