@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import calculateTotal from '../utils/calculateTotal';
+import Button from './Button';
+import Genericinput from './GenericInput';
 
 function Card({ url, alt, id, name, price, total, product }) {
-  console.log(product);
   const [quantity, setQuantity] = useState(product.quantity || 0);
 
   const handleClick = (value) => {
@@ -70,30 +71,27 @@ function Card({ url, alt, id, name, price, total, product }) {
         { name }
       </p>
 
-      <button
+      <Button
         className="submit-btn"
         onClick={ (e) => handleClick(e.target.value) }
         type="button"
+        btnName="+"
         value="+"
-        data-testid={ `customer_products__button-card-add-item-${id}` }
-      >
-        +
-      </button>
-      <input
-        type="number"
-        data-testid={ `customer_products__input-card-quantity-${id}` }
+        testid={ `customer_products__button-card-add-item-${id}` }
+      />
+
+      <Genericinput
+        testid={ `customer_products__input-card-quantity-${id}` }
         value={ quantity }
         onChange={ (e) => handleChange(e.target.value) }
       />
-      <button
+      <Button
         className="submit-btn"
         onClick={ (e) => handleClick(e.target.value) }
         type="button"
         value="-"
-        data-testid={ `customer_products__button-card-rm-item-${id}` }
-      >
-        -
-      </button>
+        testid={ `customer_products__button-card-rm-item-${id}` }
+      />
     </div>
   );
 }

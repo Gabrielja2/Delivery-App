@@ -6,6 +6,7 @@ import { requestData } from '../services/requests';
 import UserContext from '../context/UserContext';
 import '../style/Products.css';
 import getQuantity from '../utils/getQuantity';
+import Button from '../components/Button';
 
 function Products() {
   const { products, setProducts } = useContext(UserContext);
@@ -16,7 +17,7 @@ function Products() {
     const token = localStorage.getItem('token');
     requestData('/products', token)
       .then((response) => setProducts(response));
-  }, []);
+  }, [setProducts]);
 
   const handleCheckout = () => {
     navigate.push('/customer/checkout');
@@ -24,10 +25,9 @@ function Products() {
 
   return (
     <section>
-      <NavBar user={ JSON.parse(localStorage.getItem('user')).name } />
+      <NavBar />
       <section className="products-container">
-        { products.length && (
-
+        {
           products.map((p, index) => (
             <Card
               id={ p.id }
@@ -42,20 +42,15 @@ function Products() {
 
             />
           ))
-        )}
+        }
       </section>
-      <button
+      <Button
         testid="customer_products__checkout-bottom-value"
         onClick={ handleCheckout }
-        disabled={ cartTotal === 0 }
+        isDisable={ cartTotal === 0 }
         type="button"
-      >
-        <span data-testid="customer_products__checkout-bottom-value">
-
-          { cartTotal.toFixed(2).toString().replace('.', ',') }
-        </span>
-
-      </button>
+        btnName={ cartTotal.toFixed(2).toString().replace('.', ',') }
+      />
     </section>
   );
 }
