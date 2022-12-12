@@ -1,46 +1,82 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import Card from '../components/Card';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
-import { requestData } from '../services/requests';
-import UserContext from '../context/UserContext';
+import CheckoutCard from '../components/CheckoutCard';
+
 import '../style/Products.css';
-import getQuantity from '../utils/getQuantity';
 
 function Checkout() {
+  const [cart, setCart] = useState([]);
+  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+  const setCarrinho = () => {
+    setCart(carrinho);
+  };
+
+  const valorTotal = () => {
+    const total = cart.reduce((acc, curr) => {
+      acc += (curr.price * curr.quantity);
+
+      return acc;
+    }, 0);
+    return total;
+  };
+
+  useEffect(() => {
+    setCarrinho();
+  }, []);
+
   return (
     <section>
       <NavBar />
       <section className="products-container">
         {
-          products.map((p, index) => (
-            <Card
-              id={ p.id }
+          carrinho.map(({ name, quantity, price, totalPrice }, index) => (
+            <CheckoutCard
+              id={ index + 1 }
               key={ index }
-              name={ p.name }
-              price={ p.price }
-              url={ p.urlImage }
-              total={ (total) => setCartTotal(total) }
-              product={ getQuantity().find((prod) => prod.name === p.name) || 0 }
+              name={ name }
+              quantity={ quantity }
+              price={ price }
+              totalPrice={ totalPrice }
+              index={ index }
 
             />
           ))
         }
+        <button
+          className="submit-btn"
+          disabled={ false }
+          type="button"
+        >
+          <span data-testid="customer_checkout__element-order-total-price">
+            { valorTotal() }
+          </span>
+        </button>
       </section>
-      <button
-        className="submit-btn"
-        data-testid="customer_products__button-cart"
-        onClick={ handleCheckout }
-        disabled={ cartTotal === 0 }
-        type="button"
-      >
-        <span data-testid="customer_products__checkout-bottom-value">
-          { cartTotal.toFixed(2).replace('.', ',') }
-        </span>
-      </button>
+      <section className="products-container">
+        <div className="card-container">
+          <p data-testid="customer_checkout__select-seller">
+            ola n deu certo
+          </p>
+          <p data-testid="customer_checkout__input-address">
+            infelizmente
+          </p>
+          <p
+            data-testid="customer_checkout__input-address-number"
+          >
+            ;xx
+          </p>
 
+          <button
+            type="submit"
+            data-testid="customer_checkout__button-submit-order"
+          >
+            Finalizar Pedido
+          </button>
+        </div>
+      </section>
     </section>
   );
 }
 
-export default Products;
+export default Checkout;
