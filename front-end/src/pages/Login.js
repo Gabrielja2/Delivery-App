@@ -16,7 +16,7 @@ function Login() {
   function navigateFunction(value) {
     navigate.push(value);
   }
-
+  console.log(email);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
