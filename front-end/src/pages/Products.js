@@ -6,7 +6,6 @@ import { requestData } from '../services/requests';
 import UserContext from '../context/UserContext';
 import '../style/Products.css';
 import getQuantity from '../utils/getQuantity';
-import Button from '../components/Button';
 
 function Products() {
   const { products, setProducts } = useContext(UserContext);
@@ -42,13 +41,18 @@ function Products() {
           ))
         }
       </section>
-      <Button
-        testid="customer_products__checkout-bottom-value"
+      <button
+        className="submit-btn"
+        data-testid="customer_products__button-cart"
         onClick={ handleCheckout }
-        isDisable={ cartTotal === 0 }
+        disabled={ cartTotal === 0 }
         type="button"
-        btnName={ cartTotal.toFixed(2).replace('.', ',') }
-      />
+      >
+        <span data-testid="customer_products__checkout-bottom-value">
+          { cartTotal.toFixed(2).replace('.', ',') }
+        </span>
+      </button>
+
     </section>
   );
 }
