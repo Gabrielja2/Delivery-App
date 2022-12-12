@@ -8,8 +8,7 @@ function UserProvider({ children }) {
   const [password, setPassword] = useState('');
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  // const [total, setTotal] = useState(0);
-
+  const [orders, setOrders] = useState([]);
   const contextUser = useMemo(() => ({
     name,
     setName,
@@ -21,17 +20,16 @@ function UserProvider({ children }) {
     setProducts,
     cart,
     setCart,
-  }), [email, password, name, products, cart]);
-
+    orders,
+    setOrders,
+  }), [email, password, name, products, cart, orders]);
   return (
     <UserContext.Provider value={ contextUser }>
       { children }
     </UserContext.Provider>
   );
 }
-
 export default UserProvider;
-
 UserProvider.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object),
 }.isRequired;

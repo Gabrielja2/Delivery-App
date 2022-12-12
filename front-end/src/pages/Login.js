@@ -13,40 +13,42 @@ function Login() {
   const [errorRequisiton, setErrorRequisition] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
   const navigate = useHistory();
-
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      if (JSON.parse(user).role === 'admin') {
-        navigate.push('/admin/manage');
-      }
-
-      if (JSON.parse(user).role === 'customer') {
-        navigate.push('/customer/products');
-      }
-      if (JSON.parse(user).role === 'seller') {
-        navigate.push('/seller/products');
-      }
-    }
-  }, []);
+  function navigateFunction(value) {
+    navigate.push(value);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = await requestLogin('/login', { email, password });
       localStorage.setItem('user', JSON.stringify(data));
-
       if (data.role === 'administrator') {
-        navigate.push('/admin/manage');
+        navigateFunction('/admin/manage');
+      } else if (data.role === 'seller') {
+        navigateFunction('/seller/orders');
       } else {
-        navigate.push('/customer/products');
+        navigateFunction('/customer/products');
       }
     } catch ({ response }) {
       setErrorMessage(response.data.message);
       setErrorRequisition(true);
     }
   };
-
+  useEffect(() => {
+    const redirect = () => {
+      const data = JSON.parse(localStorage.getItem('user'));
+      if (data) {
+        if (data.role === 'administrator') {
+          navigate.push('/admin/manage');
+        } else if (data.role === 'seller') {
+          navigate.push('/seller/orders');
+        } else if (data.role === 'customer') {
+          navigate.push('/customer/products');
+        }
+      }
+    };
+    redirect();
+  }, [navigate]);
   return (
     <section className="wrapper">
       <section className="user-login-area">
@@ -87,5 +89,4 @@ function Login() {
     </section>
   );
 }
-
 export default Login;
