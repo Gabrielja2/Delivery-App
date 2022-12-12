@@ -16,7 +16,18 @@ const getAll = async (req, res, next) => {
     next(error);
   }
 };
+
+const getAllSellers = async (req, res, next) => {
+  try {
+    const sellers = await OrderService.getAllSellers();
+    res.status(200).json(sellers);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAll,
   create,
+  getAllSellers,
 };

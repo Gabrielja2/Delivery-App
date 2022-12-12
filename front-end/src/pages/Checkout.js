@@ -3,10 +3,22 @@ import NavBar from '../components/NavBar';
 import CheckoutCard from '../components/CheckoutCard';
 
 import '../style/Products.css';
+import { requestSellers } from '../services/requests';
 
 function Checkout() {
   const [cart, setCart] = useState([]);
+  const [seller, setSeller] = useState([]);
+  const [address, setAddress] = useState('');
   const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+  const handleChange = (value) => {
+    console.log(address);
+    setAddress(value);
+  };
+
+  useEffect(() => {
+    requestSellers('/seller').then((response) => setSeller(response));
+  }, [setSeller]);
 
   const setCarrinho = () => {
     setCart(carrinho);
@@ -55,17 +67,29 @@ function Checkout() {
       </section>
       <section className="products-container">
         <div className="card-container">
-          <p data-testid="customer_checkout__select-seller">
-            ola n deu certo
-          </p>
-          <p data-testid="customer_checkout__input-address">
-            infelizmente
-          </p>
-          <p
-            data-testid="customer_checkout__input-address-number"
+          <select
+            data-testid="customer_checkout__select-seller"
+            name="seller"
           >
-            ;xx
-          </p>
+            {
+              seller.map(({ name }, index) => (
+                <option value="" key={ index }>{name}</option>
+              ))
+            }
+          </select>
+
+          <input
+            type="text"
+            data-testid="customer_checkout__input-address"
+            onChange={ (e) => handleChange(e.target.value) }
+
+          />
+          <input
+            type="text"
+            data-testid="customer_checkout__input-address-number"
+            onChange={ (e) => handleChange(e.target.value) }
+
+          />
 
           <button
             type="submit"
