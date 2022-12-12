@@ -1,58 +1,57 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import calculateTotal from '../utils/calculateTotal';
 import Button from './Button';
-import GenericInput from './GenericInput';
-import UserContext from '../context/UserContext';
 
-function Card({ url, alt, id, name, price }) {
-  const [inputValue, setInputValue] = useState(0);
-  const { cart, setCart } = useContext(UserContext);
-  const [product, setProduct] = useState();
+function Card({ url, alt, id, name, price, total, product }) {
+  const [quantity, setQuantity] = useState(product.quantity || 0);
 
-  const handleOnClickAdd = (event) => {
-    event.preventDefault();
-    const value = inputValue + 1;
-    setInputValue(value);
-
-    const productPrice = event.target.parentNode.firstChild.innerText;
-    const productName = event.target.parentNode.children[2].innerText;
-
-    setProduct({ productName, productPrice, quantity: value });
+  const handleClick = (value) => {
+    if (value === '+') {
+      setQuantity(quantity + 1);
+    }
+    if (value === '-' && quantity > 0) {
+      setQuantity(quantity - 1);
+    }
   };
 
-  const handleOnClickRemove = (event) => {
-    event.preventDefault();
-    let value = inputValue;
+  const handleChange = (value) => {
+    setQuantity(value);
+  };
 
-    if (inputValue !== 0) {
-      value = inputValue - 1;
+  const createCart = () => {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho'));
+    if (carrinho) {
+      const exists = carrinho.some((prod) => prod.name === name);
+      if (exists) {
+        carrinho = carrinho.reduce((acc, curr) => {
+          if (curr.name === name) {
+            curr.quantity = quantity;
+            return acc;
+          }
+          return acc;
+        }, carrinho);
+      } else {
+        carrinho = [
+          ...carrinho,
+          { name, price, quantity, id },
+        ];
+      }
+      const updatedCart = carrinho.filter((prod) => prod.quantity);
+      localStorage.setItem('carrinho', JSON.stringify(updatedCart));
+      total(calculateTotal(updatedCart));
+    } else {
+      localStorage.setItem(
+        'carrinho',
+        JSON.stringify([{ name, price, quantity }]),
+      );
+      total(calculateTotal([{ name, price, quantity }]));
     }
-    // const value = inputValue - 1;
-    const productPrice = event.target.parentNode.firstChild.innerText;
-    const productName = event.target.parentNode.children[2].innerText;
-
-    setInputValue(value);
-
-    setProduct({ productName, productPrice, quantity: value });
   };
 
   useEffect(() => {
-    if (product) {
-      const findProduct = cart.findIndex((p) => p.productName === product?.productName);
-      const magicNumber = -1;
-
-      if (product.quantity === 0) {
-        const filterProducts = cart.filter((p) => p.productName !== product?.productName);
-        return setCart([...filterProducts]);
-      }
-      if (findProduct === magicNumber) {
-        setCart([...cart, product]);
-      } else {
-        const filterProducts = cart.filter((p) => p.productName !== product?.productName);
-        setCart([...filterProducts, product]);
-      }
-    }
-  }, [product]);
+    createCart();
+  }, [quantity]);
 
   return (
     <div className="card-container">
@@ -77,20 +76,25 @@ function Card({ url, alt, id, name, price }) {
       </p>
 
       <Button
-        onClick={ handleOnClickAdd }
-        btnName="+"
+        className="submit-btn"
+        onClick={ (e) => handleClick(e.target.value) }
         type="button"
+        value="+"
         testid={ `customer_products__button-card-add-item-${id}` }
       />
-      <GenericInput
-        testid={ `customer_products__input-card-quantity-${id}` }
-        value={ inputValue }
-        setter={ setInputValue }
+
+      <input
+        type="text"
+        data-testid={ `customer_products__input-card-quantity-${id}` }
+        onChange={ (e) => handleChange(e.target.value) }
+        value={ quantity }
       />
+
       <Button
-        onClick={ handleOnClickRemove }
-        btnName="-"
+        className="submit-btn"
+        onClick={ (e) => handleClick(e.target.value) }
         type="button"
+        value="-"
         testid={ `customer_products__button-card-rm-item-${id}` }
       />
     </div>

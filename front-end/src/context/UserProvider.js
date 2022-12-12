@@ -8,6 +8,7 @@ function UserProvider({ children }) {
   const [password, setPassword] = useState('');
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  // const [total, setTotal] = useState(0);
 
   const contextUser = useMemo(() => ({
     name,

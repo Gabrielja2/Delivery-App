@@ -6,7 +6,8 @@ function Button({
   testid,
   type,
   isDisable,
-  onClick }) {
+  onClick,
+  value }) {
   return (
     <button
       disabled={ isDisable }
@@ -14,6 +15,7 @@ function Button({
       type={ type === 'submit' ? 'submit' : 'button' }
       className="submit-btn"
       onClick={ onClick }
+      value={ value }
     >
       { btnName }
     </button>
