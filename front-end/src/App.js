@@ -6,6 +6,7 @@ import UserProvider from './context/UserProvider';
 import Products from './pages/Products';
 import Manage from './pages/Manage';
 import Orders from './pages/Orders';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" component={ Register } />
         <Route path="/admin/manage" component={ Manage } />
         <Route path="/seller/orders" component={ Orders } />
+        <Route path="/customer/checkout" component={ Checkout } />
       </UserProvider>
 
     </Switch>
