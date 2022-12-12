@@ -85,7 +85,7 @@ function Card({ url, alt, id, name, price, total, product }) {
 
       <input
         type="text"
-        datat-testid={ `customer_products__input-card-quantity-${id}` }
+        data-testid={ `customer_products__input-card-quantity-${id}` }
         onChange={ (e) => handleChange(e.target.value) }
         value={ quantity }
       />
