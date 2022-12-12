@@ -35,10 +35,8 @@ function Products() {
               name={ p.name }
               price={ p.price }
               url={ p.urlImage }
-              total={ (t) => setCartTotal(t) }
-              product={
-                (getQuantity().find((prod) => prod.name === p.name)) || 0
-              }
+              total={ (total) => setCartTotal(total) }
+              product={ getQuantity().find((prod) => prod.name === p.name) || 0 }
 
             />
           ))
@@ -49,7 +47,7 @@ function Products() {
         onClick={ handleCheckout }
         isDisable={ cartTotal === 0 }
         type="button"
-        btnName={ cartTotal.toFixed(2).toString().replace('.', ',') }
+        btnName={ cartTotal.toFixed(2).replace('.', ',') }
       />
     </section>
   );

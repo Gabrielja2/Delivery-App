@@ -17,23 +17,24 @@ function Card({ url, alt, id, name, price, total, product }) {
   };
 
   const createCart = () => {
-    if (localStorage.getItem('carrinho')) {
-      let cart = JSON.parse(localStorage.getItem('carrinho'));
-      if (cart.some((p) => p.name === name)) {
-        cart = cart.reduce((acc, curr) => {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho'));
+    if (carrinho) {
+      const exists = carrinho.some((prod) => prod.name === name);
+      if (exists) {
+        carrinho = carrinho.reduce((acc, curr) => {
           if (curr.name === name) {
             curr.quantity = quantity;
             return acc;
           }
           return acc;
-        }, cart);
+        }, carrinho);
       } else {
-        cart = [
-          ...cart,
+        carrinho = [
+          ...carrinho,
           { name, price, quantity, id },
         ];
       }
-      const updatedCart = cart.filter((prod) => prod.quantity);
+      const updatedCart = carrinho.filter((prod) => prod.quantity);
       localStorage.setItem('carrinho', JSON.stringify(updatedCart));
       total(calculateTotal(updatedCart));
     } else {
@@ -75,7 +76,6 @@ function Card({ url, alt, id, name, price, total, product }) {
         className="submit-btn"
         onClick={ (e) => handleClick(e.target.value) }
         type="button"
-        btnName="+"
         value="+"
         testid={ `customer_products__button-card-add-item-${id}` }
       />
