@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import calculateTotal from '../utils/calculateTotal';
 import Button from './Button';
-import Genericinput from './GenericInput';
 
 function Card({ url, alt, id, name, price, total, product }) {
   const [quantity, setQuantity] = useState(product.quantity || 0);
@@ -14,6 +13,10 @@ function Card({ url, alt, id, name, price, total, product }) {
     if (value === '-' && quantity > 0) {
       setQuantity(quantity - 1);
     }
+  };
+
+  const handleChange = (value) => {
+    setQuantity(value);
   };
 
   const createCart = () => {
@@ -80,11 +83,13 @@ function Card({ url, alt, id, name, price, total, product }) {
         testid={ `customer_products__button-card-add-item-${id}` }
       />
 
-      <Genericinput
-        testid={ `customer_products__input-card-quantity-${id}` }
-        value={ quantity }
+      <input
+        type="text"
+        datat-testid={ `customer_products__input-card-quantity-${id}` }
         onChange={ (e) => handleChange(e.target.value) }
+        value={ quantity }
       />
+
       <Button
         className="submit-btn"
         onClick={ (e) => handleClick(e.target.value) }
