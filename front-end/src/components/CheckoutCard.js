@@ -16,10 +16,10 @@ function CheckoutCard({ id, name, quantity, price, index }) {
         { quantity }
       </p>
       <p data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }>
-        { price }
+        { price.replace('.', ',') }
       </p>
       <span data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }>
-        { quantity * price }
+        { (quantity * price).toFixed(2).toString().replace('.', ',') }
       </span>
       <button
         type="button"

@@ -61,7 +61,7 @@ function Checkout() {
           type="button"
         >
           <span data-testid="customer_checkout__element-order-total-price">
-            { valorTotal() }
+            { valorTotal().toFixed(2).toString().replace('.', ',') }
           </span>
         </button>
       </section>
