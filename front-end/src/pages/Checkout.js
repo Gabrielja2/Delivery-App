@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import CheckoutCard from '../components/CheckoutCard';
-
 import '../style/Products.css';
-import { requestSellers } from '../services/requests';
+import { createOrder, requestSellers } from '../services/requests';
+import calculateTotal from '../utils/calculateTotal';
 
 function Checkout() {
   const [cart, setCart] = useState([]);
   const [seller, setSeller] = useState([]);
   const [address, setAddress] = useState('');
+  const [addressNumber, setAddressNumber] = useState('');
+  const [currentSeller, setCurrentSeller] = useState(seller[0]);
+  const navigate = useHistory();
 
   const getCarrinho = () => {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     return carrinho;
   };
 
-  const handleChange = (value) => {
+  const handleChangeAddress = (value) => {
     setAddress(value);
+  };
+
+  const handleChangeNumber = (value) => {
+    setAddressNumber(value);
   };
 
   const handleDelete = (id) => {
@@ -41,6 +49,34 @@ function Checkout() {
       return acc;
     }, 0);
     return total;
+  };
+
+  const getSellerId = async (name) => {
+    const data = await requestSellers('/seller');
+    const { id } = await data.find((s) => s.name !== name);
+    return id;
+  };
+
+  const handleClick = async () => {
+    const id = await getSellerId(currentSeller);
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const carrinho = JSON.parse(localStorage.getItem('carrinho'));
+    const total = calculateTotal(carrinho);
+
+    const orderData = {
+      userId: id,
+      sellerId: id,
+      totalPrice: Number(total.toFixed(2)),
+      deliveryAddress: address,
+    };
+
+    const productData = {
+      ...orderData,
+    };
+
+    const data = await createOrder(productData, '/seller/orders', token);
+    console.log(data);
+    navigate.push(`/customer/orders/${id}`);
   };
 
   useEffect(() => {
@@ -81,6 +117,8 @@ function Checkout() {
           <select
             data-testid="customer_checkout__select-seller"
             name="seller"
+            onChange={ (e) => setCurrentSeller(e.target.value) }
+            value={ currentSeller }
           >
             {
               seller.map(({ name }, index) => (
@@ -92,20 +130,22 @@ function Checkout() {
           <input
             type="text"
             data-testid="customer_checkout__input-address"
-            onChange={ (e) => handleChange(e.target.value) }
+            onChange={ (e) => handleChangeAddress(e.target.value) }
             value={ address }
 
           />
           <input
             type="text"
             data-testid="customer_checkout__input-address-number"
-            onChange={ (e) => handleChange(e.target.value) }
+            onChange={ (e) => handleChangeNumber(e.target.value) }
+            value={ addressNumber }
 
           />
 
           <button
             type="submit"
             data-testid="customer_checkout__button-submit-order"
+            onClick={ () => handleClick() }
           >
             Finalizar Pedido
           </button>
