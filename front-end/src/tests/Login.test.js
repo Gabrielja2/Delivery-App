@@ -6,7 +6,6 @@ import Login from '../pages/Login';
 import UserProvider from "../context/UserProvider";
 
 describe('Testando login', () => {
-  // beforeEach(() => renderWithRouter(<Login />));
 
   it('Testa se tem input para email', () => {
     renderWithRouter(
@@ -60,5 +59,20 @@ describe('Testando login', () => {
     })
 
     expect(registerBtn).toBeInTheDocument();
+  });
+
+  it('Testa se é possível realizar cadastro', () => {
+    renderWithRouter(
+    <UserProvider>
+      <Login />
+      </UserProvider>
+      );
+      
+    const registerBtn = screen.getByRole('button', {
+      name: /sign in/i
+    })
+
+    userEvent.click(registerBtn);
+
   });
 });
