@@ -1,8 +1,28 @@
-const { Sale } = require('../../database/models');
+const { Sequelize } = require('sequelize');
+const { Sale, SaleProduct } = require('../../database/models');
+const errorGenerate = require('../utils/errorGenerate');
 
-const create = async ({ orderData, _productData }) => {
-  const orders = await Sale.create(orderData);
-  return orders;
+const { production } = require('../../database/config/config');
+
+const sequelize = new Sequelize(production);
+
+const create = async ({ orderData, productData }) => {
+  const t = await sequelize.transaction();
+
+  try {
+    const newOrder = await Sale.create(orderData,
+       { transaction: t });
+       
+       await SaleProduct.create(productData, { transaction: t });
+       
+       t.commit();
+       
+       return newOrder.id;
+      } catch (e) {
+    console.log(e);
+    await t.rollback();
+    throw errorGenerate(409, 'Error ao criar o pedido');
+  }
 };
 const getAll = async (req) => {
   const { id/* , role */ } = req;
