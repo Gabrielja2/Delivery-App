@@ -1,6 +1,8 @@
 const { Sequelize } = require('sequelize');
 const { Sale, SaleProduct } = require('../../database/models');
 const errorGenerate = require('../utils/errorGenerate');
+const { User, Sale } = require('../../database/models');
+
 
 const { production } = require('../../database/config/config');
 
@@ -31,7 +33,15 @@ const getAll = async (req) => {
   const orders = await Sale.findAll({ where: { id } });
   return orders;
 };
+
+const getAllSellers = async () => {
+  const sellers = await User.findAll({ where: { role: 'seller' }, attributes: ['id', 'name'] });
+
+  return sellers;
+};
+
 module.exports = {
   getAll,
   create,
+  getAllSellers,
 };
