@@ -1,7 +1,6 @@
 const { Sequelize } = require('sequelize');
-const { Sale, SaleProduct } = require('../../database/models');
+const { Sale, SaleProduct, User } = require('../../database/models');
 const errorGenerate = require('../utils/errorGenerate');
-const { User, Sale } = require('../../database/models');
 
 
 const { production } = require('../../database/config/config');
