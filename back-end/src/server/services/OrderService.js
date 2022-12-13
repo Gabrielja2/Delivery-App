@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 const { Sale, SaleProduct, User } = require('../../database/models');
 const errorGenerate = require('../utils/errorGenerate');
 const { production } = require('../../database/config/config');
+
 const sequelize = new Sequelize(production);
 
 const create = async ({ orderData, productData }) => {
