@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CheckoutCard({ id, name, quantity, price, index }) {
+function CheckoutCard({ id, name, quantity, price, index, handleDelete }) {
   return (
     <div className="card-container">
       <p data-testid={ `customer_checkout__element-order-table-item-number-${index}` }>
@@ -24,6 +24,7 @@ function CheckoutCard({ id, name, quantity, price, index }) {
       <button
         type="button"
         data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+        onClick={ () => handleDelete(index) }
       >
         Remover
       </button>

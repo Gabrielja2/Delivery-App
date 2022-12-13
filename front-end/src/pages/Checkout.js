@@ -9,11 +9,21 @@ function Checkout() {
   const [cart, setCart] = useState([]);
   const [seller, setSeller] = useState([]);
   const [address, setAddress] = useState('');
-  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+  const getCarrinho = () => {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    return carrinho;
+  };
 
   const handleChange = (value) => {
-    console.log(address);
     setAddress(value);
+  };
+
+  const handleDelete = (id) => {
+    const newCart = getCarrinho()?.filter((item, index) => index !== id);
+
+    localStorage.setItem('carrinho', JSON.stringify(newCart));
+    setCart(JSON.parse(localStorage.getItem('carrinho')));
   };
 
   useEffect(() => {
@@ -21,7 +31,7 @@ function Checkout() {
   }, [setSeller]);
 
   const setCarrinho = () => {
-    setCart(carrinho);
+    setCart(getCarrinho());
   };
 
   const valorTotal = () => {
@@ -42,7 +52,7 @@ function Checkout() {
       <NavBar />
       <section className="products-container">
         {
-          carrinho.map(({ name, quantity, price, totalPrice }, index) => (
+          getCarrinho().map(({ name, quantity, price, totalPrice }, index) => (
             <CheckoutCard
               id={ index + 1 }
               key={ index }
@@ -51,6 +61,7 @@ function Checkout() {
               price={ price }
               totalPrice={ totalPrice }
               index={ index }
+              handleDelete={ (id) => handleDelete(id) }
 
             />
           ))
@@ -73,7 +84,7 @@ function Checkout() {
           >
             {
               seller.map(({ name }, index) => (
-                <option value="" key={ index }>{name}</option>
+                <option key={ index }>{name}</option>
               ))
             }
           </select>
@@ -82,6 +93,7 @@ function Checkout() {
             type="text"
             data-testid="customer_checkout__input-address"
             onChange={ (e) => handleChange(e.target.value) }
+            value={ address }
 
           />
           <input
