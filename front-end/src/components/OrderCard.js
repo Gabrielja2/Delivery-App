@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 function OrderCard({ id, data, status, price, address }) {
   const { role } = JSON.parse(localStorage.getItem('user'));
-
+  const dia = `${data[8]}${data[9]}`;
+  const mes = `${data[5]}${data[6]}`;
+  const ano = `${data[0]}${data[1]}${data[2]}${data[3]}`;
   return (
     <div className="card-container">
       <p data-testid={ `${role}_orders__element-order-id-${id}` }>
@@ -15,10 +17,10 @@ function OrderCard({ id, data, status, price, address }) {
       <p
         data-testid={ `${role}_orders__element-order-date-${id}` }
       >
-        { `${data[8]}${data[9]}/${data[5]}${data[6]}/${data[2]}${data[3]}` }
+        { `${dia}/${mes}/${ano}` }
       </p>
       <p data-testid={ `${role}_orders__element-card-price-${id}` }>
-        { price }
+        { price.replace('.', ',') }
       </p>
       {
         role === 'seller' ? (
