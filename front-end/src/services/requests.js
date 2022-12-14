@@ -16,6 +16,15 @@ export const requestData = async (endpoint) => {
   return data;
 };
 
+export const createOrder = async (endpoint, body) => {
+  const { data } = await api.post(
+    endpoint,
+    body,
+    { headers: { Authorization: JSON.parse(localStorage.getItem('user')).token } },
+  );
+  return data;
+};
+
 export const requestSellers = async (endpoint) => {
   const { data } = await api.get(endpoint);
   return data;
