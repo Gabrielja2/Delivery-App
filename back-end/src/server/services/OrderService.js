@@ -17,11 +17,8 @@ const create = async ({ orderData, productData }) => {
   return id;
 };
 
-const getAll = async (req) => {
-  const { id/* , role */ } = req;
-  // const userRole = role === 'seller' ? 'sellerId' : 'userId';
-  // const user  = { [userRole]: id }
-  const orders = await Sale.findAll({ where: { id } });
+const getAll = async (user) => {  
+  const orders = await Sale.findAll({ where: user });
   return orders;
 };
 

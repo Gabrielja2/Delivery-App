@@ -7,25 +7,34 @@ import { requestData } from '../services/requests';
 
 function Orders() {
   const { orders, setOrders } = useContext(UserContext);
-  useEffect(() => {
+
+  const getOrders = async () => {
     const token = localStorage.getItem('token');
     requestData('/seller/orders', token).then((response) => setOrders(response));
+  };
+
+  useEffect(() => {
+    getOrders();
+    console.log(orders);
   }, [setOrders]);
+
   return (
     <section>
       <SellerNavBar user={ JSON.parse(localStorage.getItem('user')).name } />
       <section className="products-container">
         {
-          orders.map((p) => (
-            <OrderCard
-              key={ p.id }
-              id={ p.id }
-              data={ p.data }
-              status={ p.status }
-              price={ p.price }
-              addrres={ p.addrres }
-            />
-          ))
+          orders.length > 0 ? (
+            orders.map((p) => (
+              <OrderCard
+                key={ p.id }
+                id={ p.id }
+                data={ p.saleDate }
+                status={ p.status }
+                price={ p.totalPrice }
+                address={ p.deliveryAddress }
+              />
+            ))
+          ) : null
         }
       </section>
     </section>
