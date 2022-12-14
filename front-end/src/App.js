@@ -18,6 +18,7 @@ function App() {
         <Route path="/register" component={ Register } />
         <Route path="/admin/manage" component={ Manage } />
         <Route path="/seller/orders" component={ Orders } />
+        <Route path="/customer/orders" component={ Orders } />
         <Route path="/customer/checkout" component={ Checkout } />
       </UserProvider>
 

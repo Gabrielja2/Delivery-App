@@ -11,7 +11,10 @@ const create = async (req, res, next) => {
 };
 const getAll = async (req, res, next) => {
   try {
-    const orders = await OrderService.getAll(req);
+    const { id, role } = req;
+    const userRole = role === 'seller' ? 'sellerId' : 'userId';
+    const user = { [userRole]: id };
+    const orders = await OrderService.getAll(user);
     res.status(200).json(orders);
   } catch (error) {
     next(error);
