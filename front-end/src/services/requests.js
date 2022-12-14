@@ -22,7 +22,7 @@ export const createOrder = async (endpoint, body) => {
     body,
     { headers: { Authorization: JSON.parse(localStorage.getItem('user')).token } },
   );
-  return data.id;
+  return data;
 };
 
 export const requestSellers = async (endpoint) => {

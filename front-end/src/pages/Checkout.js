@@ -57,25 +57,36 @@ function Checkout() {
     return id;
   };
 
+  const getproductData = () => {
+    const product = JSON.parse(localStorage.getItem('carrinho')) || [];
+    return product.map((prod) => ({
+      productId: prod.id,
+      quantity: prod.quantity,
+    }));
+  };
+
   const handleClick = async () => {
-    const id = await getSellerId(currentSeller);
+    const userId = JSON.parse(localStorage.getItem('user')).id;
+    const sellerId = await getSellerId(currentSeller);
     const { token } = JSON.parse(localStorage.getItem('user'));
     const carrinho = JSON.parse(localStorage.getItem('carrinho'));
     const total = calculateTotal(carrinho);
 
     const orderData = {
-      userId: id,
-      sellerId: id,
+      userId,
+      sellerId,
       totalPrice: Number(total.toFixed(2)),
       deliveryAddress: address,
+      deliveryNumber: addressNumber,
+      status: 'Pendente',
+
     };
 
-    const productData = {
-      ...orderData,
-    };
-
-    const data = await createOrder(productData, '/seller/orders', token);
-    console.log(data);
+    const id = await createOrder(
+      '/seller/orders',
+      { orderData, productData: getproductData() },
+      token,
+    );
     navigate.push(`/customer/orders/${id}`);
   };
 
@@ -145,7 +156,7 @@ function Checkout() {
           <button
             type="submit"
             data-testid="customer_checkout__button-submit-order"
-            onClick={ () => handleClick() }
+            onClick={ handleClick }
           >
             Finalizar Pedido
           </button>
