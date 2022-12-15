@@ -7,6 +7,7 @@ import Products from './pages/Products';
 import Manage from './pages/Manage';
 import Orders from './pages/Orders';
 import Checkout from './pages/Checkout';
+import OrderDetail from './pages/OrderDetail';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/admin/manage" component={ Manage } />
         <Route path="/seller/orders" component={ Orders } />
         <Route path="/customer/orders" component={ Orders } />
+        <Route path="/customer/orders/:saleId" component={ OrderDetail } />
         <Route path="/customer/checkout" component={ Checkout } />
       </UserProvider>
 
