@@ -1,56 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { requestSellers } from '../services/requests';
+import convertDate from '../utils/convertData';
 
 function OrderCardDetails({
   id,
-  data,
-  status, /* , price */
-}) {
-  const [sellerName, setSellerName] = useState('');
-  const dia = `${data[8]}${data[9]}`;
-  const mes = `${data[5]}${data[6]}`;
-  const ano = `${data[0]}${data[1]}${data[2]}${data[3]}`;
-
-  const getSellerName = async () => {
-    const resp = await requestSellers('/seller');
-    const { name } = resp.find((r) => r.id === id);
-    setSellerName(name);
-  };
-
-  useEffect(() => {
-    getSellerName();
-  }, []);
-
+  saleDate,
+  status,
+  sellerName,
+  totalPrice, /* ,
+  products */ }) {
+  const commomDataTest = 'customer_order_details__element-order-details-label';
   return (
     <div className="card-container">
-      <p
-        data-testid="customer_order_details__element-order-details-label-order-id"
-      >
-        { id }
-      </p>
-      <p
-        data-testid="customer_order_details__element-order-details-label-seller-name"
-      >
-        { sellerName }
-      </p>
-      <p
-        data-testid="customer_order_details__element-order-details-label-order-date"
-      >
-        { `${dia}/${mes}/${ano}` }
-      </p>
-      <p
-        data-testid="customer_order_details__element-order-details-label-delivery-status"
-      >
-        { status }
-      </p>
-      <button
-        data-testid="customer_order_details__button-delivery-check"
-        type="submit"
-      >
-        MARCAR COMO ENTREGUE
-      </button>
+      <section>
+        <p
+          data-testid={ `${commomDataTest}-order-id` }
+        >
+          { id }
+        </p>
+        <p
+          data-testid={ `${commomDataTest}-seller-name` }
+        >
+          { sellerName }
+        </p>
+        <p
+          data-testid={ `${commomDataTest}-order-date` }
+        >
+          { convertDate(saleDate) }
+        </p>
+        <p
+          data-testid={ `${commomDataTest}-delivery-status` }
+        >
+          { status }
+        </p>
+        <button
+          disabled
+          data-testid="customer_order_details__button-delivery-check"
+          type="submit"
+        >
+          MARCAR COMO ENTREGUE
+        </button>
+      </section>
+      <section>
+        <p
+          data-testid="customer_order_details__element-order-total-price"
+        >
+          { totalPrice.replace('.', ',') }
+        </p>
 
+      </section>
     </div>
   );
 }

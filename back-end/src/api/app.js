@@ -13,6 +13,7 @@ app.use('/login', router.loginRouter);
 app.use('/user', router.userRouter);
 app.use('/admin', router.adminRouter);
 app.use('/seller', router.sellerRouter);
+app.use('/orders', router.ordersRouter);
 app.use('/products', router.productRouter);
 
 app.use(errorMiddleware);

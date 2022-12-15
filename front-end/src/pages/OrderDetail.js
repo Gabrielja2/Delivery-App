@@ -16,15 +16,15 @@ function OrderDetail() {
     return path[path.length - 1];
   };
 
-  const getOrders = async () => {
+  const getOrder = async () => {
     const token = localStorage.getItem('token');
-    const data = await requestData('/seller/orders', token);
-    const filteredOrders = data.filter((o) => o.id === Number(getOrderId()));
-    setOrders(filteredOrders);
+    const data = await requestData(`/orders/${getOrderId()}`, token);
+    console.log('data', data);
+    setOrders(data);
   };
 
   useEffect(() => {
-    getOrders();
+    getOrder();
   }, [setOrders]);
 
   return (
@@ -37,9 +37,11 @@ function OrderDetail() {
               <OrderCardDetails
                 key={ o.id }
                 id={ o.id }
-                data={ o.saleDate }
+                saleDate={ o.saleDate }
                 status={ o.status }
-                price={ o.totalPrice }
+                totalPrice={ o.totalPrice }
+                sellerName={ o.seller.name }
+                products={ o.product }
 
               />
             ))

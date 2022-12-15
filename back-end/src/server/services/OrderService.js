@@ -1,4 +1,4 @@
-const { Sale, SaleProduct, User } = require('../../database/models');
+const { Sale, SaleProduct, User, Product } = require('../../database/models');
 const errorGenerate = require('../utils/errorGenerate');
 
 const create = async ({ orderData, productData }) => {
@@ -28,8 +28,18 @@ const getAllSellers = async () => {
   return sellers;
 };
 
+const getOrderById = async (id) => {
+  const order = await Sale.findAll({ where: { id },
+    include: [
+    { model: Product, as: 'product', through: { attributes: ['quantity'] } },
+    { model: User, as: 'seller', attributes: ['name'] },
+  ] });
+  return order;
+};
+
 module.exports = {
   getAll,
   create,
   getAllSellers,
+  getOrderById,
 };

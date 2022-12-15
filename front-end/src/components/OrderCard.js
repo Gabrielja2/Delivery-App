@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import convertDate from '../utils/convertData';
 
 function OrderCard({ id, data, status, price, address }) {
   const { role } = JSON.parse(localStorage.getItem('user'));
-  const dia = `${data[8]}${data[9]}`;
-  const mes = `${data[5]}${data[6]}`;
-  const ano = `${data[0]}${data[1]}${data[2]}${data[3]}`;
+
   return (
     <Link className="card-container" to={ `/customer/orders/${id}` }>
       <p data-testid={ `${role}_orders__element-order-id-${id}` }>
@@ -18,7 +17,7 @@ function OrderCard({ id, data, status, price, address }) {
       <p
         data-testid={ `${role}_orders__element-order-date-${id}` }
       >
-        { `${dia}/${mes}/${ano}` }
+        { convertDate(data) }
       </p>
       <p data-testid={ `${role}_orders__element-card-price-${id}` }>
         { price.replace('.', ',') }
