@@ -20,7 +20,7 @@ function Orders() {
 
   return (
     <section>
-      <SellerNavBar user={ JSON.parse(localStorage.getItem('user')).name } />
+      <SellerNavBar />
       <section className="products-container">
         {
           orders.length > 0 ? (

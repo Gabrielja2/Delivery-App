@@ -26,7 +26,7 @@ function Manage() {
 
   return (
     <section className="wrapper">
-      <AdmNavbar user={ JSON.parse(localStorage.getItem('user')).name } />
+      <AdmNavbar />
       <section className="user-login-area">
         <img alt="Trybe Delivery App" />
         <form className="form">

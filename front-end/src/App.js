@@ -14,13 +14,13 @@ function App() {
     <Switch>
       <UserProvider>
         <Route exact path="/" render={ () => <Redirect to="/login" /> } />
-        <Route path="/customer/products" component={ Products } />
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Register } />
         <Route path="/admin/manage" component={ Manage } />
         <Route path="/seller/orders" component={ Orders } />
-        <Route path="/customer/orders" component={ Orders } />
-        <Route path="/customer/orders/:saleId" component={ OrderDetail } />
+        <Route exact path="/customer/orders" component={ Orders } />
+        <Route exact path="/customer/products" component={ Products } />
+        <Route exact path="/customer/orders/:saleId" component={ OrderDetail } />
         <Route path="/customer/checkout" component={ Checkout } />
       </UserProvider>
 
