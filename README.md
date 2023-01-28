@@ -26,7 +26,7 @@
 
 # Orientações
 
-
+   <br />
 <details>
 <summary><strong>Como ter acesso ao projeto e instalar as dependências</strong></summary><br />
 
