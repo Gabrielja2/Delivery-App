@@ -46,6 +46,7 @@
 </details>
     
 <strong>Banco de dados</strong><br />
-    Para o banco de dados, utilizamos o ORM `Sequelize`, para fazer interface com o `MySQL` 
+    - Para o banco de dados, utilizamos o ORM `Sequelize`, para fazer interface com o `MySQL`
+    - O Diagrama de ER também pode ajudar a "visualizar" o banco de dados;
     
 </details>
