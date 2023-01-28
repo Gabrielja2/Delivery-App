@@ -25,32 +25,6 @@
 
 # Orientações
 
-<details>
-  <summary><strong>🐋 Rodando no Docker vs Localmente</strong></summary><br />
-  
-  ## Com Docker
-
-  > Rode o serviço `node` com o comando `docker-compose up -d`.
-  - Esse serviço irá inicializar um container chamado `trybers_and_dragons`.
-  - A partir daqui você pode rodar o container `trybers_and_dragons` via CLI ou abri-lo no VS Code.
-
-  > Use o comando `docker exec -it trybers_and_dragons bash`.
-  - Ele te dará acesso ao terminal interativo do container criado pelo compose, que está rodando em segundo plano.
-
-  > Instale as dependências [**Caso existam**] com `npm install`
-  
-  ⚠ Atenção ⚠ Caso opte por utilizar o Docker, **TODOS** os comandos disponíveis no `package.json` (npm start, npm test, npm run dev, ...) devem ser executados **DENTRO** do container, ou seja, no terminal que aparece após a execução do comando `docker exec` citado acima. 
-
----
-  
-  ## Sem Docker
-  
-  > Instale as dependências [**Caso existam**] com `npm install`
-
-  ✨ **Dica:** Para rodar o projeto desta forma, obrigatoriamente você deve ter o `node` instalado em seu computador. 
-
-  <br/>
-</details>
 
 <details>
 <summary><strong>Como ter acesso ao projeto e instalar as dependências</strong></summary><br />
@@ -61,11 +35,11 @@
     2. Instale as dependências através do terminal:
     *`npm install`
 
-    3. Suba os imagens do servidor node e do banco de do docker-compose com o comando:
+    3. Suba a imagem do banco de dados do docker-compose com o comando:
     *`docker-compose up -d`
    
-    4. Dentro de app/frontend, suba a aplicação com o comando `npm start` através do terminal.
+    4. Dentro de app/frontend, rode novamente o `npm install` e suba a aplicação com o comando `npm start` através do terminal.
    
-    5. Dentro de app/backend, suba a api com o comando `npm start` através do terminal.
+    5. Dentro de app/backend, rode novamente o `npm install` e suba a api com o comando `npm run dev` através do terminal.
     
 </details>
