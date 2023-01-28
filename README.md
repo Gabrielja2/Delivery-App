@@ -44,19 +44,8 @@
     5. Dentro de app/backend, rode novamente o `npm install` e suba a api com o comando `npm run dev` através do terminal.
     
 </details>
-
-<details>
     
-<summary><strong>Banco de dados</strong></summary><br />
-    Para o banco de dados, utilizamos o ORM `Sequelize`, para fazer interface com o `MySQL`
+<strong>Banco de dados</strong><br />
+    Para o banco de dados, utilizamos o ORM `Sequelize`, para fazer interface com o `MySQL` 
     
-    O [Diagrama de ER](./assets/readme/eer.png) também pode ajudar a "visualizar" o banco de dados;
-    
-  - Respeite a estrutura do banco de dados, ou seja, sua implementação **não deve** adicionar ou remover tabelas, campos ou relacionamentos e sua API deve estar preparada para aproveitar essa estrutura por completo.
-   
-</details>
-    
-<strong>Sequelize</strong><br />
-    Para o banco de dados, utilizamos o ORM `Sequelize`, para fazer interface com o `MySQL`.
-
 </details>
