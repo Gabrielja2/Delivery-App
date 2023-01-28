@@ -26,8 +26,8 @@
 
 # Orientações
 
-   <br />
 <details>
+    
 <summary><strong>Como ter acesso ao projeto e instalar as dependências</strong></summary><br />
 
     1. Entre na pasta do repositório que você acabou de clonar ou fazer o download do arquivo zip:
