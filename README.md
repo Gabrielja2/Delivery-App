@@ -3,33 +3,30 @@
 
 <strong>👨‍💻 O que foi desenvolvido</strong><br />
     Aqui você vai encontrar os detalhes de como foi estruturado este projeto e instruções para rodar.    
-    O `TFC` é um site informativo sobre partidas e classificações de futebol! ⚽️.    
-    **Desenvolvido cumprindo todas as regras de negócio** estabelecidas e **essa API é capaz de ser consumida por um front-end já provido nesse projeto**.
+   
+  Esse será o seu projeto mais completo até agora! Nessa aplicação, seu grupo será responsável por criar e integrar tanto o back-end quanto o front-end, criando uma plataforma de delivery de cerveja. 🍻
 
-<details>   
-   <summary><strong> Estrutura do projeto</summary></strong><br />
-      
-   O projeto é composto de 4 entidades importantes para sua estrutura:
+  O projeto não é só codar, mas também é trabalhar em equipe, aprender e se divertir muito! 
 
-   1️⃣ **Banco de dados:**
-     - Será um container docker MySQL já configurado no docker-compose através de um serviço definido como `db`.
-     - Tem o papel de fornecer dados para o serviço de _backend_.  
-     - Você também pode conectar a um Cliente MySQL (Workbench, Beekeeper, DBeaver e etc), colocando as credenciais configuradas no docker-compose no serviço `db`.
+  **Neste projeto, seu grupo deve desenvolver um app de delivery para uma distribuidora de bebidas. Veja abaixo o contexto da entrega que deve ser feita:**
 
-   2️⃣ **Back-end:** 
-    - Deve rodar na porta `3001`, pois o front-end faz requisições para ele nessa porta por padrão;
-    - Garanta que o `express` é executado e a aplicação ouve a porta que vem das variáveis de ambiente;
+  A distribuidora de cervejas da dona Tereza está se informatizando! 🚀 Seu negócio, antes focado em um local específico da cidade, passou a receber uma quantidade massiva de encomendas de outros pontos, expandindo sua atuação via delivery. Isso tudo graças ao excelente preço das bebidas e atendimento da equipe de vendas.
 
+  Agora a distribuidora possui alguns pontos de venda na cidade para agilizar no atendimento dessas áreas. Cada ponto de venda, por sua vez, possui uma pessoa vendedora responsável.
 
-   3️⃣ **Front-end:**
-     - O front já estava concluído.
-     - O front se comunica com serviço de back-end pela url `http://localhost:3001` através dos endpoints construidos. 
+  Como seu antigo sistema, que era um conjunto de planilhas, já não atende a necessidade do negócio por gerar muita manutenção, dona Tereza procurou a sua equipe de pessoas desenvolvedoras com uma ideia de aplicativo que pudesse agilizar a vida de sua equipe e das pessoas que compram seus produtos. O aplicativo precisa:
 
-   4️⃣ **Docker:**
-     - O `docker-compose` tem a responsabilidade de unir todos os serviços conteinerizados (backend, frontend e db) e subir o projeto completo com o comando `npm run compose:up` ou `npm run compose:up:dev`;
-     - Os `Dockerfiles` estão já estão configurados corretamente nas raízes do `front-end` e `back-end`, para conseguir inicializar a aplicação;
-      <br/>
- </details>
+  - Ter acesso via login: tanto clientes como pessoas vendedoras, assim como a própria dona Tereza, que administra o sistema, devem ter acesso ao aplicativo via login, porém para funções diferentes: (1) A pessoa cliente, que compra da lista de produtos; (2) A pessoa vendedora, que aprova, prepara e entrega; (3) A pessoa administradora, que gerencia quem usa o aplicativo;
+  - Fazer a comunicação entre clientes e pessoas vendedoras: a pessoa cliente faz o pedido via "carrinho de compras" e a pessoa vendedora aprova, prepara e envia esse pedido. Quando o produto é recebido por quem comprou, essa pessoa marca o pedido como "recebido". Ambos devem possuir detalhes sobre seus pedidos;
+  - Se a pessoa cliente faz o pedido, o mesmo deve aparecer para a pessoa vendedora em seu dash de pedidos após a atualização da página. A pessoa cliente, por sua vez, deve ter as informações sobre seu pedido quando sua página for atualizada, ou seja, ter informações se o pedido está sendo preparado ou se já saiu pra entrega;
+
+  Sua equipe, que já possui uma boa experiência com desenvolvimento, em pouco tempo apresentou um [protótipo](https://www.figma.com/file/izpLyHbig6O2SRo86oQsLJ/T19_Project_-Delivery-App?node-id=0%3A1) e um [Diagrama de ER](./assets/readme/eer.png) conforme imagem:
+
+  ![Diagrama de ER](./assets/readme/eer.png)
+
+  A ideia da sua equipe já pressupõe alguma escalabilidade, dado que foram estabelecidas algumas entidades genéricas no banco de dados e componentização no front-end, para que, caso o sistema cresça, não seja muito difícil mudar e ampliar essa estrutura.
+
+  **A proposta encantou, mas dona Tereza quer ver o negócio em ação! Ela está disposta a pagar por um MVP do projeto e vocês fecharam o negócio com um prazo combinado para entrega.**
 
 # Orientações
 
