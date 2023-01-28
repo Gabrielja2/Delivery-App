@@ -5,7 +5,7 @@ const { comparePass } = require('../validations/md5Login');
 
 const login = async ({ email, password }) => {
   const user = await User.findOne({ where: { email } });
-  if (!user) throw errorGenerate(404, 'Incorrect email or password');
+  if (!user) throw errorGenerate(404, 'User not found');
 
   const compare = comparePass(password, user.password);
   if (!compare) throw new Error('Incorrect email or password');
