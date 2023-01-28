@@ -52,19 +52,25 @@
    
     - React;
     
-    - Context
+    - Context;
     
-    - FetchAPI
+    - FetchAPI;
     
 </details>
 
     
 <details>    
 <summary><strong>Backend</strong></summary><br />
+    
+    - Node
 
-    - Para o banco de dados, utilizamos o ORM `Sequelize`, para fazer interface com o `MySQL`
+    - ORM `Sequelize`; 
    
-    - O Diagrama de ER também pode ajudar a "visualizar" o banco de dados;
+    - MySQL;
+    
+    - Express
+    
+    - JWT
 </details>
     
 <details>    
