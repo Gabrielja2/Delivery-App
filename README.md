@@ -49,7 +49,9 @@
     
 <summary><strong>Banco de dados</strong></summary><br />
     Para o banco de dados, utilizamos o ORM `Sequelize`, para fazer interface com o `MySQL`
-  - O [Diagrama de ER](./assets/readme/eer.png) também pode ajudar a "visualizar" o banco de dados;
+    
+    O [Diagrama de ER](./assets/readme/eer.png) também pode ajudar a "visualizar" o banco de dados;
+    
   - Respeite a estrutura do banco de dados, ou seja, sua implementação **não deve** adicionar ou remover tabelas, campos ou relacionamentos e sua API deve estar preparada para aproveitar essa estrutura por completo.
    
 </details>
