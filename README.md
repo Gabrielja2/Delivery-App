@@ -2,7 +2,7 @@
 
 
 <strong>👨‍💻 O que foi desenvolvido</strong><br />
-    Esse projeto foi desenvolvido em grupo, com a ajuda do [Abdel]([https://github.com/Abdel175]), [Gabriel Lyra]([https://www.betrybe.com/](https://github.com/GabrielLyra22), [Jeferson](https://github.com/jefersongjr), [João](https://github.com/joaovavelino) e [Vitor](https://github.com/vtrtga). Aqui você vai encontrar os detalhes de como foi estruturado e instruções.    
+    Esse projeto foi desenvolvido em grupo, com a ajuda do [Abdel](https://github.com/Abdel175), [Gabriel Lyra]([https://www.betrybe.com/](https://github.com/GabrielLyra22), [Jeferson](https://github.com/jefersongjr), [João](https://github.com/joaovavelino) e [Vitor](https://github.com/vtrtga). Aqui você vai encontrar os detalhes de como foi estruturado e instruções.    
    
   Este foi o projeto mais completo até agora! Nessa aplicação, nosso equipe, criou e integrou tanto o back-end quanto o front-end, criando uma plataforma de delivery de cerveja. 🍻 
 
