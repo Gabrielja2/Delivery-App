@@ -2,9 +2,9 @@
 
 
 <strong>👨‍💻 O que foi desenvolvido</strong><br />
-    * Aqui você vai encontrar os detalhes de como foi estruturado este projeto e instruções para rodar.    
-    * O `TFC` é um site informativo sobre partidas e classificações de futebol! ⚽️.    
-    * **Desenvolvido cumprindo todas as regras de negócio** estabelecidas e **essa API é capaz de ser consumida por um front-end já provido nesse projeto**.
+    Aqui você vai encontrar os detalhes de como foi estruturado este projeto e instruções para rodar.    
+    O `TFC` é um site informativo sobre partidas e classificações de futebol! ⚽️.    
+    **Desenvolvido cumprindo todas as regras de negócio** estabelecidas e **essa API é capaz de ser consumida por um front-end já provido nesse projeto**.
 
 <details>   
    <summary><strong> Estrutura do projeto</summary></strong><br />
