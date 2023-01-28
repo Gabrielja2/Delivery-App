@@ -26,8 +26,7 @@
 
 # Orientações
 
-<details>
-    
+<details>    
 <summary><strong>Como ter acesso ao projeto e instalar as dependências</strong></summary><br />
 
     1. Entre na pasta do repositório que você acabou de clonar ou fazer o download do arquivo zip:
@@ -46,8 +45,7 @@
 </details>
 
 
-<details>
-    
+<details>    
 <summary><strong>Frontend</strong></summary><br />
 
     - Javascript;
@@ -61,10 +59,7 @@
 </details>
 
     
-<details>
-    
-<details>
-    
+<details>    
 <summary><strong>Backend</strong></summary><br />
 
     - Para o banco de dados, utilizamos o ORM `Sequelize`, para fazer interface com o `MySQL`
