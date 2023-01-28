@@ -45,12 +45,16 @@
     
 </details>
 
- <strong>Banco de dados</strong><br />
+<details>
+    
+<summary><strong>Banco de dados</strong><br /></summary><br />
 
-  Para o banco de dados, utilizaremos o ORM `Sequelize`, que fará interface com o `MySQL`. Para isso, atente-se às seguintes orientações:
+    Para o banco de dados, utilizaremos o ORM `Sequelize`, que fará interface com o `MySQL`. Para isso, atente-se às seguintes orientações:
   - Utilize para referência de criação de `migrations` e `seeders` o arquivo `./db.example.sql`;
   - O [Diagrama de ER](./assets/readme/eer.png) também pode ajudar a "visualizar" o banco de dados;
   - Respeite a estrutura do banco de dados, ou seja, sua implementação **não deve** adicionar ou remover tabelas, campos ou relacionamentos e sua API deve estar preparada para aproveitar essa estrutura por completo.
+   
+</details>  
 
   <strong>Sequelize</strong><br />
 
