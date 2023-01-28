@@ -19,7 +19,7 @@
 <br />
 
  
-
+  Diagrama de entidades, as tabelas que foram criadas:
   ![Diagrama de ER](./assets/readme/eer.png)
 
 
