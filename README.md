@@ -8,7 +8,7 @@
 
   A distribuidora de cervejas da dona Tereza está se informatizando! 🚀 Seu negócio, antes focado em um local específico da cidade, passou a receber uma quantidade massiva de encomendas de outros pontos, expandindo sua atuação via delivery. Isso tudo graças ao excelente preço das bebidas e atendimento da equipe de vendas, agora possui alguns pontos de venda na cidade. Cada ponto de venda, por sua vez, possui uma pessoa vendedora responsável.
 
-  Como seu antigo sistema, que era um conjunto de planilhas, já não atendia a necessidade do negócio pois gerava muita manutenção, nosso objetivo foi desenvolver um aplicativo com:
+  Como seu antigo sistema, que era um conjunto de planilhas, já não atendia a necessidade do negócio pois gerava muita manutenção, nosso objetivo foi desenvolver uma aplicação que:
   
     1. Acesso via login: tanto clientes como pessoas vendedoras, assim como a própria dona Tereza, que administra o sistema, devem ter acesso ao aplicativo via login, porém para funções diferentes: (1) A pessoa cliente, que compra da lista de produtos; (2) A pessoa vendedora, que aprova, prepara e entrega; (3) A pessoa administradora, que gerencia quem usa o aplicativo;
 
