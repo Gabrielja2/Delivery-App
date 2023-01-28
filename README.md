@@ -44,8 +44,34 @@
     5. Dentro de app/backend, rode novamente o `npm install` e suba a api com o comando `npm run dev` através do terminal.
     
 </details>
+
+
+<details>
+    
+<summary><strong>Frontend</strong></summary><br />
+
+    - Javascript;
+   
+    - React;
+    
+    - Context
+    
+    - FetchAPI
+    
+</details>
+
     
 <details>
+    
+<details>
+    
+<summary><strong>Backend</strong></summary><br />
+
+    - Para o banco de dados, utilizamos o ORM `Sequelize`, para fazer interface com o `MySQL`
+   
+    - O Diagrama de ER também pode ajudar a "visualizar" o banco de dados;
+</details>
+    
     
 <summary><strong>Banco de dados</strong></summary><br />
 
