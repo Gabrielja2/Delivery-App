@@ -19,7 +19,7 @@
 <br />
 
  
-  Diagrama de entidades, as tabelas que foram criadas:
+  Diagrama de entidades, as tabelas que foram criadas no banco de dados:
   ![Diagrama de ER](./assets/readme/eer.png)
 
 
