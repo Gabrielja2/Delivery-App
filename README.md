@@ -48,7 +48,6 @@
 <details>
     
 <summary><strong>Banco de dados</strong><br /></summary><br />
-
     Para o banco de dados, utilizaremos o ORM `Sequelize`, que fará interface com o `MySQL`. Para isso, atente-se às seguintes orientações:
   - Utilize para referência de criação de `migrations` e `seeders` o arquivo `./db.example.sql`;
   - O [Diagrama de ER](./assets/readme/eer.png) também pode ajudar a "visualizar" o banco de dados;
