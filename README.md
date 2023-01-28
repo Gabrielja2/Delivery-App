@@ -4,11 +4,9 @@
 <strong>👨‍💻 O que foi desenvolvido</strong><br />
     Aqui você vai encontrar os detalhes de como foi estruturado este projeto e instruções para rodar.    
    
-  Esse será o seu projeto mais completo até agora! Nessa aplicação, seu grupo será responsável por criar e integrar tanto o back-end quanto o front-end, criando uma plataforma de delivery de cerveja. 🍻
+  Este foi o projeto mais completo até agora! Nessa aplicação, nosso grupo criou e integrou tanto o back-end quanto o front-end, criando uma plataforma de delivery de cerveja. 🍻
 
-  O projeto não é só codar, mas também é trabalhar em equipe, aprender e se divertir muito! 
-
-  **Neste projeto, seu grupo deve desenvolver um app de delivery para uma distribuidora de bebidas. Veja abaixo o contexto da entrega que deve ser feita:**
+  Este projeto, não era só codar, mas também trabalhar em equipe, aprender e se divertir! 
 
   A distribuidora de cervejas da dona Tereza está se informatizando! 🚀 Seu negócio, antes focado em um local específico da cidade, passou a receber uma quantidade massiva de encomendas de outros pontos, expandindo sua atuação via delivery. Isso tudo graças ao excelente preço das bebidas e atendimento da equipe de vendas.
 
