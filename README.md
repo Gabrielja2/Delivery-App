@@ -63,7 +63,7 @@
     
     - Node
 
-    - ORM `Sequelize`; 
+    - ORM `Sequelize`
    
     - MySQL;
     
